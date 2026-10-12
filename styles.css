@@ -150,3 +150,47 @@
 .persona-app .first-page .walk-field:first-child { grid-column: 1 / -1; }
 .persona-app .step-progress { height: 4px; background: #18172d; border-radius: 3px; overflow: hidden; margin-bottom: 28px; }
 .persona-app .step-progress-fill { display: block; width: 100%; height: 100%; transform-origin: left; background: linear-gradient(90deg, #3632b4, #7540d7, #ed00d5, #7540d7, #3632b4); }
+
+/* Same moving contour as alanlouette.be, scoped and independently named. */
+@property --persona-button-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+.persona-app .next-button, .persona-app #generate-pdf {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: transparent;
+}
+.persona-app .next-button::before, .persona-app #generate-pdf::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    z-index: 2;
+    background: conic-gradient(from var(--persona-button-angle), #ff00aa 0deg, #ff00aa 70deg, #8d3dff 130deg, #0066ff 200deg, #0066ff 270deg, #8d3dff 320deg, #ff00aa 360deg);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+    animation: persona-button-border 10s linear infinite;
+}
+.persona-app .next-button::after, .persona-app #generate-pdf::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: inherit;
+    background: transparent;
+    pointer-events: none;
+    transition: background .35s ease;
+}
+.persona-app .next-button:hover::after, .persona-app #generate-pdf:hover::after { background: #ffffff14; }
+.persona-app .next-button:disabled::before, .persona-app #generate-pdf:disabled::before { animation-play-state: paused; }
+@keyframes persona-button-border { to { --persona-button-angle: 360deg; } }
+@media (prefers-reduced-motion: reduce) {
+    .persona-app .next-button::before, .persona-app #generate-pdf::before { animation: none; }
+    .persona-app .next-button::after, .persona-app #generate-pdf::after { transition: none; }
+}
