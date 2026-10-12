@@ -27,3 +27,6 @@ Wrap the app in an element with class `persona-app` (the standalone page uses it
 on `body`). All CSS selectors are scoped to this class to avoid styling the host
 website. The interface uses a dark navy background and subtle violet accents;
 the selected persona color is used for the portrait border, export button and PDF.
+
+Layout follows alanlouette.be: 90% width, 1400px maximum, 20px horizontal
+padding and Outfit typography. The standalone page loads Outfit from Google Fonts.

@@ -9,7 +9,7 @@
     margin: 0;
     color: var(--text);
     background: var(--bg);
-    font: 15px/1.6 'Poppins', system-ui, sans-serif;
+    font: 18px/1.7 'Outfit', system-ui, sans-serif;
     min-height: 100vh;
     color-scheme: dark;
 }
@@ -19,9 +19,9 @@
 .persona-app h1, .persona-app h2, .persona-app h3 { font: inherit; font-weight: 600; letter-spacing: -.025em; }
 .persona-app button, .persona-app input, .persona-app textarea, .persona-app select { font: inherit; }
 .persona-app button {
-    padding: 12px 24px;
+    padding: 10px 30px;
     border: 1px solid #aaa9b8;
-    border-radius: 14px;
+    border-radius: 10px;
     background: transparent;
     color: var(--text);
     cursor: pointer;
@@ -38,18 +38,18 @@
     border-radius: 10px;
     background: var(--field);
     color: var(--text);
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.6;
 }
 .persona-app :is(input[type=text], textarea, select):focus { border-color: var(--accent); }
 .persona-app textarea { resize: vertical; min-height: 110px; }
 .persona-app .small-textarea { min-height: 100px; }
 .persona-app .big-textarea { min-height: 140px; }
-.persona-app ::placeholder { color: #8b8b9d; opacity: 1; font-size: 13px; }
-.persona-app label { color: var(--text); font-size: 13px; font-weight: 500; line-height: 1.5; }
+.persona-app ::placeholder { color: #8b8b9d; opacity: 1; font-size: 15px; }
+.persona-app label { color: var(--text); font-size: 15px; font-weight: 500; line-height: 1.5; }
 
 /* Guided questions share the same dark page, separated only by a fine rule. */
-.persona-app .walkthrough { max-width: 1180px; margin: auto; padding: 48px 40px; min-height: 100vh; }
+.persona-app .walkthrough { width: 90%; max-width: 1400px; margin: auto; padding: 48px 20px; min-height: 100vh; }
 .persona-app .walk-container section { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 72px; min-height: calc(100vh - 96px); }
 .persona-app .column.left { padding-right: 32px; border-right: 1px solid var(--line); }
 .persona-app .column-padding { display: flex; flex-direction: column; }
@@ -61,7 +61,7 @@
 .persona-app .walkthrough-avatar { width: 112px; height: 112px; }
 .persona-app input.avatar-name { background: transparent; border: 0; text-align: center; font-size: 22px; padding: 14px 0 0; }
 .persona-app .left h2 { font-size: 16px; margin-bottom: 14px; }
-.persona-app .left p { font-size: 13px; color: var(--muted); line-height: 1.9; }
+.persona-app .left p { font-size: 15px; color: var(--muted); line-height: 1.9; }
 .persona-app .button-walk:not(.confirm) { color: var(--muted); font-size: 12px; margin-top: 24px; align-self: flex-start; padding: 8px 13px; }
 .persona-app .page-title { font-size: 25px; line-height: 1.4; margin-bottom: 14px; }
 .persona-app .right label { margin: 16px 0 8px; }
@@ -71,7 +71,7 @@
 .persona-app .next-button, .persona-app .confirm { background: transparent; border-color: #aaa9b8; color: var(--text); }
 
 /* Overview: open columns, quiet fields, no large enclosing panel. */
-.persona-app .overview { --persona-color: #a78bfa; max-width: 1240px; margin: auto; padding: 28px 40px 80px; }
+.persona-app .overview { --persona-color: #a78bfa; width: 90%; max-width: 1400px; margin: auto; padding: 28px 20px 80px; }
 .persona-app .share-container { display: flex; align-items: center; justify-content: flex-end; gap: 10px; margin-bottom: 28px; }
 .persona-app .share-text { font-size: 12px; color: var(--muted); }
 .persona-app .share-icons { display: flex; gap: 8px; }
@@ -85,7 +85,7 @@
 .persona-app .input-color-container { position: relative; overflow: hidden; flex: 0 0 28px; width: 28px; height: 28px; border: 2px solid #75758b; border-radius: 50%; background: var(--persona-color); }
 .persona-app #input-color { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; padding: 0; border: 0; cursor: pointer; }
 .persona-app .input-color-container:focus-within { outline: 2px solid var(--accent); outline-offset: 4px; }
-.persona-app #generate-pdf { border-color: var(--persona-color); padding: 12px 24px; }
+.persona-app #generate-pdf { border-color: var(--persona-color); padding: 10px 30px; }
 .persona-app .hidden-elements { display: none; }
 .persona-app .overview-container { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 52px; }
 .persona-app .overview-left { padding-right: 28px; border-right: 1px solid var(--line); }
@@ -94,7 +94,7 @@
 .persona-app #sortable-list-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 28px; }
 .persona-app div.dragable-item { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 16px 0 24px; border: 0; background: transparent; }
 .persona-app .dragable-item label { padding-right: 20px; }
-.persona-app .overview :is(input[type=text], textarea, select) { font-size: 13px; }
+.persona-app .overview :is(input[type=text], textarea, select) { font-size: 15px; }
 .persona-app .overview textarea { max-height: none; overflow: hidden; }
 .persona-app .overview .small-textarea { min-height: 92px; }
 .persona-app .overview .big-textarea { min-height: 120px; }
@@ -157,15 +157,15 @@
     initial-value: 0deg;
     inherits: false;
 }
-.persona-app .next-button, .persona-app #generate-pdf {
+.persona-app .confirm, .persona-app .next-button, .persona-app #generate-pdf {
     position: relative;
     isolation: isolate;
     overflow: hidden;
     background: transparent;
     border-color: transparent;
 }
-.persona-app .next-button:hover { border-color: transparent; }
-.persona-app .next-button::before, .persona-app #generate-pdf::before {
+.persona-app .confirm:hover, .persona-app .next-button:hover { border-color: transparent; }
+.persona-app .confirm::before, .persona-app .next-button::before, .persona-app #generate-pdf::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -180,7 +180,7 @@
     pointer-events: none;
     animation: persona-button-border 10s linear infinite;
 }
-.persona-app .next-button::after, .persona-app #generate-pdf::after {
+.persona-app .confirm::after, .persona-app .next-button::after, .persona-app #generate-pdf::after {
     content: "";
     position: absolute;
     inset: 1px;
@@ -189,10 +189,10 @@
     pointer-events: none;
     transition: background .35s ease;
 }
-.persona-app .next-button:hover::after, .persona-app #generate-pdf:hover::after { background: #ffffff14; }
-.persona-app .next-button:disabled::before, .persona-app #generate-pdf:disabled::before { animation-play-state: paused; }
+.persona-app .confirm:hover::after, .persona-app .next-button:hover::after, .persona-app #generate-pdf:hover::after { background: #ffffff14; }
+.persona-app .confirm:disabled::before, .persona-app .next-button:disabled::before, .persona-app #generate-pdf:disabled::before { animation-play-state: paused; }
 @keyframes persona-button-border { to { --persona-button-angle: 360deg; } }
 @media (prefers-reduced-motion: reduce) {
-    .persona-app .next-button::before, .persona-app #generate-pdf::before { animation: none; }
-    .persona-app .next-button::after, .persona-app #generate-pdf::after { transition: none; }
+    .persona-app .confirm::before, .persona-app .next-button::before, .persona-app #generate-pdf::before { animation: none; }
+    .persona-app .confirm::after, .persona-app .next-button::after, .persona-app #generate-pdf::after { transition: none; }
 }
