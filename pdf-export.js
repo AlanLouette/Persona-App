@@ -1,63 +1,113 @@
-/* Export values as text instead of slicing a screenshot across A4 pages. */
-function exportPersonaPDF(root, color) {
+/* A text-based A4 report: profile first, followed by professional details. */
+async function exportPersonaPDF(root, color) {
     const doc = new jsPDF('p', 'mm', 'a4');
-    const margin = 15, width = 180, bottom = 282, lineHeight = 5;
     const rgb = color.match(/\w\w/g).map(channel => parseInt(channel, 16));
-    let y = margin;
-    const newPage = () => { doc.addPage(); y = margin; };
-    const wrap = (text, size) => {
-        doc.setFontSize(size);
-        return doc.splitTextToSize(text || ' ', width - 12);
-    };
-    const text = (lines, size, bold, ink) => {
+    const left = 18, right = 192, bottom = 278, line = 5;
+    let y = 40;
+    const font = (size, bold = false) => {
         doc.setFontSize(size);
         doc.setFontStyle(bold ? 'bold' : 'normal');
-        doc.setTextColor(...ink);
-        lines.forEach(line => {
-            if (y + lineHeight > bottom) newPage();
-            doc.text(line, margin + 6, y);
-            y += lineHeight;
-        });
     };
-    text(['Persona Canvas'], 20, true, rgb);
-    text(['door BeMarketing Group'], 10, false, [60, 60, 60]);
-    y += 8;
-    const avatar = root.querySelector('.avatar');
-    if (avatar?.complete && avatar.naturalWidth) {
-        try {
-            const canvas = document.createElement('canvas');
-            canvas.width = canvas.height = 256;
-            canvas.getContext('2d').drawImage(avatar, 0, 0, 256, 256);
-            doc.addImage(canvas.toDataURL('image/png'), 'PNG', margin + 6, y, 30, 30);
-            y += 38;
-        } catch (error) {
-            // Remote avatars may forbid canvas access; entered answers still export.
-            console.warn('Avatar could not be embedded in the PDF', error);
-        }
-    }
-
-    // Follow the current order, omit editor controls, and include all entered text.
-    root.querySelectorAll('div.dragable-item:not(.add-item)').forEach(item => {
-        const label = item.querySelector('label');
-        if (!label) return;
-        const title = label.querySelector('input')?.value ?? label.textContent.trim();
-        const values = [...item.querySelectorAll('input, textarea, select')]
-            .filter(input => !label.contains(input))
-            .map(input => input.value || input.getAttribute('placeholder') || '');
-        doc.setFontStyle('bold');
-        const heading = wrap(title, 12);
-        doc.setFontStyle('normal');
-        const body = wrap(values.join('\n'), 10);
-        const height = (heading.length + body.length) * lineHeight + 12;
-        // Ordinary cards stay whole. Oversized answers continue on another page.
-        if (y + Math.min(height, bottom - margin) > bottom) newPage();
+    const header = () => {
+        font(20, true);
+        doc.setTextColor(...rgb);
+        doc.text('Persona Canvas', left, 22);
+        font(9);
+        doc.setTextColor(80, 80, 80);
+        doc.text('door BeMarketing Group', left, 29);
+    };
+    const nextPage = () => { doc.addPage(); header(); y = 40; };
+    const section = title => {
+        if (y + 25 > bottom) nextPage();
+        font(14, true);
+        doc.setTextColor(...rgb);
+        doc.text(title, left, y);
         doc.setDrawColor(...rgb);
-        doc.line(margin, y, margin + width, y);
-        y += 7;
-        text(heading, 12, true, rgb);
-        y += 2;
-        text(body, 10, false, [30, 30, 30]);
-        y += 8;
-    });
+        doc.line(left, y + 4, right, y + 4);
+        y += 14;
+    };
+    const read = item => {
+        const label = item.querySelector('label');
+        if (!label) return null;
+        const inputs = [...item.querySelectorAll('input, textarea, select')].filter(input => !label.contains(input));
+        return {
+            title: label.querySelector('input')?.value ?? label.textContent.trim(),
+            value: inputs.map(input => input.value).join('\n') || ' ',
+            long: inputs.some(input => input.tagName === 'TEXTAREA')
+        };
+    };
+    const measure = (field, width) => {
+        font(10, true);
+        const heading = doc.splitTextToSize(field.title, width);
+        font(10);
+        const body = doc.splitTextToSize(field.value, width);
+        return { heading, body, height: (heading.length + body.length) * line + 10 };
+    };
+    const draw = (field, x, start, width) => {
+        const measured = measure(field, width);
+        font(10, true); doc.setTextColor(...rgb);
+        doc.text(measured.heading, x, start);
+        font(10); doc.setTextColor(30, 30, 30);
+        doc.text(measured.body, x, start + measured.heading.length * line + 2);
+    };
+    const fullField = field => {
+        let { heading, body, height } = measure(field, right - left);
+        if (height <= bottom - 40 && y + height > bottom) nextPage();
+        // Repeat the original question when a very long answer continues.
+        while (body.length) {
+            const available = Math.floor((bottom - y - heading.length * line - 8) / line);
+            if (available < 1) { nextPage(); continue; }
+            const chunk = body.splice(0, available);
+            draw({ ...field, value: chunk.join('\n') }, left, y, right - left);
+            y += (heading.length + chunk.length) * line + 10;
+            if (body.length) nextPage();
+        }
+    };
+    const fields = (items, x = left, width = right - left) => {
+        const column = (width - 10) / 2;
+        for (let i = 0; i < items.length; i++) {
+            const field = items[i];
+            const first = measure(field, column);
+            if (field.long || first.height > 65) { fullField(field); continue; }
+            const partner = items[i + 1];
+            const second = partner && !partner.long ? measure(partner, column) : null;
+            const paired = second && second.height <= 65;
+            const height = Math.max(first.height, paired ? second.height : 0);
+            if (y + height > bottom) nextPage();
+            draw(field, x, y, column);
+            if (paired) { draw(partner, x + column + 10, y, column); i++; }
+            y += height;
+        }
+    };
+    header();
+    section('General profile');
+    const avatar = root.querySelector('.avatar');
+    if (avatar) {
+        // A square crop clipped to a circle, including uploaded portraits.
+        await avatar.decode();
+        const canvas = document.createElement('canvas');
+        canvas.width = canvas.height = 512;
+        const ctx = canvas.getContext('2d');
+        ctx.beginPath(); ctx.arc(256, 256, 256, 0, Math.PI * 2); ctx.clip();
+        const side = Math.min(avatar.naturalWidth, avatar.naturalHeight);
+        ctx.drawImage(avatar, (avatar.naturalWidth - side) / 2, (avatar.naturalHeight - side) / 2, side, side, 0, 0, 512, 512);
+        doc.addImage(canvas.toDataURL('image/png'), 'PNG', left, y, 34, 34);
+        doc.setDrawColor(...rgb); doc.circle(left + 17, y + 17, 17);
+    }
+    const profile = [...root.querySelectorAll('#sortable-list div.dragable-item')].map(read).filter(Boolean);
+    // Compact profile facts beside the portrait; descriptions get full width.
+    const facts = profile.filter(field => !field.long);
+    const start = y;
+    fields(facts, left + 44, right - left - 44);
+    y = Math.max(y, start + 44);
+    profile.filter(field => field.long).forEach(fullField);
+    y += 5;
+    section('Professional details');
+    fields([...root.querySelectorAll('#sortable-list-2 div.dragable-item')].map(read).filter(Boolean));
+    const count = doc.internal.getNumberOfPages();
+    for (let page = 1; page <= count; page++) {
+        doc.setPage(page); font(8); doc.setTextColor(120, 120, 120);
+        doc.text(`${page} / ${count}`, right - 12, 288);
+    }
     doc.save('file.pdf');
 }

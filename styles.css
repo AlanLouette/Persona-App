@@ -459,36 +459,35 @@ Overview page
 }
 
 
-.input-color {
-    width: 100px;
-    height: 30px;
-}
-
-.generate-button {
-    flex: 1;
-    text-align: right;
-}
-
+.generate-button { flex: 1; text-align: right; }
 
 .input-color-container {
     position: relative;
     overflow: hidden;
-    width: 30px;
-    height: 30px;
-    border: solid 2px #ddd;
-    border-radius: 40px;
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
     margin-left: 1rem;
+    background: var(--persona-color, #DAB667);
 }
 
-.input-color {
+#input-color {
     position: absolute;
-    right: -8px;
-    top: -8px;
-    width: 56px;
-    height: 56px;
-    border: none;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    padding: 0;
+    border: 0;
     cursor: pointer;
 }
+.input-color-container:focus-within { outline: 2px solid white; outline-offset: 4px; }
+.overview { --persona-color: #DAB667; }
+.overview button:not(.delete-icon) { border-color: var(--persona-color); }
+.overview .add-item { border-color: var(--persona-color); color: var(--persona-color); }
+.overview .new-title { color: inherit; }
 
 .color-label {
     color: white;

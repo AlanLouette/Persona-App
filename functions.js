@@ -69,13 +69,19 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#sortable-list-2').append(item);
         item.querySelector('input').focus();
     });
-    color.addEventListener('input', () => all('.dragable-item, .colors').forEach(item => item.style.color = color.value));
+    const applyColor = () => {
+        overview.style.setProperty('--persona-color', color.value);
+        all('.dragable-item, .colors').forEach(item => item.style.color = color.value);
+    };
+    color.addEventListener('input', applyColor);
+    color.addEventListener('change', applyColor);
+    applyColor();
 
-    window.CreatePDFfromHTML = () => {
+    window.CreatePDFfromHTML = async () => {
         const button = document.querySelector('[onclick="CreatePDFfromHTML()"]');
         button.disabled = true;
         try {
-            exportPersonaPDF(document.querySelector('.printable'), color.value);
+            await exportPersonaPDF(document.querySelector('.printable'), color.value);
         } catch (error) {
             console.error('PDF export failed', error);
             alert('Unable to generate the PDF. Please try again.');
