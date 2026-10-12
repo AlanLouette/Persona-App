@@ -31,12 +31,26 @@ the selected persona color is used for the portrait border, export button and PD
 Layout follows alanlouette.be: 90% width, 1400px maximum, 20px horizontal
 padding and Outfit typography. The standalone page loads Outfit from Google Fonts.
 
-## Automatic saving
+## Saved personas and transfer
 
-`persona-storage.js` keeps one draft in localStorage, including answers, uploaded
-avatar and PDF logo, selected color, section order/deletions, custom sections and
-current view/step. Changes save after 300 ms and flush when leaving the page.
-The draft stays on the same browser and origin; it is not uploaded to a server
-and does not sync across devices. Clearing browser site data deletes it.
-The status indicates storage failures (for example, oversized image uploads).
-“New persona” clears the draft after confirmation.
+`persona-storage.js` keeps a library in localStorage. Each persona retains its
+answers, avatar, PDF logo, color, section order/deletions, custom sections and
+current view/step. Edits save after 300 ms and flush when leaving the page.
+“My personas” switches between profiles; “New persona” keeps the previous one.
+“Delete” removes only the selected persona after confirmation.
+
+Existing single drafts migrate automatically. Data stays on the same browser
+and website; clearing site data deletes it. “Export persona” downloads an editable
+JSON file with its images. “Import persona” validates that file and adds a new
+profile without overwriting existing profiles. The PDF remains a separate output.
+If browser storage is full, the status reports it and JSON export remains available.
+
+## Audience context
+
+`persona-context.js` adapts questions to B2B, B2C or B2B2C. For B2B2C, select
+business buyer or end customer. Consumer profiles show purchase budget/context
+and hide company size, turnover and reporting hierarchy. Hidden answers are
+retained when switching context and are excluded from the PDF. Each walkthrough
+step has a short explanation defined in `persona-data.js`.
+
+Run `npm test` for JSON import validation checks.

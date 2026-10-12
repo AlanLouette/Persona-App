@@ -57,6 +57,6 @@ function renderPersona() {
             <img class="avatar dragable-item" src="default-avatar.svg" alt="Persona avatar">
             <span class="persona-name" data-persona-name></span>
         </div>${cards(personaSteps.slice(0, 2))}`;
-    document.querySelector('#sortable-list-2').innerHTML = personaSteps.slice(2).map(step =>
-        `<h3 class="overview-section-title">${escape(step.title)}</h3>${cards([step])}`).join('');
+    document.querySelector('#sortable-list-2').innerHTML = personaSteps.slice(2).map((step, index) =>
+        `<h3 class="overview-section-title" data-step="${index + 2}">${escape(step.title)}</h3>${cards([step])}`).join('');
 }

@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const overview = document.querySelector('.overview');
     const walkthrough = document.querySelector('.walkthrough');
     const color = document.querySelector('#input-color');
+    const applyContext = setupPersonaContext();
     const resize = input => {
         if (input.matches('.overview textarea')) {
             input.style.height = 'auto';
@@ -50,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             input.value = target.value;
             resize(input);
         });
+        if (field === 'marketing' || field === 'buyer-context') applyContext();
         if (field === 'name') all('[data-persona-name]').forEach(label => label.textContent = target.value.trim());
         resize(target);
     });
@@ -58,9 +60,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const file = target.files[0];
         if (!file) return;
         const reader = new FileReader();
-        reader.onload = () => {
-            all('#avatar-image, .avatar').forEach(img => img.src = reader.result);
-            document.dispatchEvent(new Event('persona-change'));
+        reader.onload = async () => {
+            try {
+                const image = new Image(); image.src = reader.result;
+                await image.decode();
+                const canvas = document.createElement('canvas');
+                const scale = Math.min(1, 1024 / Math.max(image.naturalWidth, image.naturalHeight));
+                canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+                canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+                canvas.getContext('2d').drawImage(image, 0, 0, canvas.width, canvas.height);
+                const src = canvas.toDataURL('image/png');
+                all('#avatar-image, .avatar').forEach(img => img.src = src);
+                document.dispatchEvent(new Event('persona-change'));
+            } catch { alert('Please choose a valid avatar image.'); }
         };
         reader.readAsDataURL(file);
     });
@@ -135,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
         logoPreview.hidden = removeLogo.hidden = true;
     });
 
-    setupPersonaStorage({ decorate, applyColor, resize });
+    setupPersonaStorage({ decorate, applyColor, resize, applyContext });
 
     const exportButton = document.querySelector('#generate-pdf');
     exportButton.addEventListener('click', async () => {

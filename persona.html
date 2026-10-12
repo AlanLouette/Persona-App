@@ -15,13 +15,31 @@
     <script defer src="pdf-export.js"></script>
     <script defer src="persona-data.js"></script>
     <script defer src="persona-render.js"></script>
+    <script defer src="persona-context.js"></script>
     <script defer src="persona-storage.js"></script>
     <script defer src="functions.js"></script>
 
 </head>
 
 <body class="persona-app">
-    <div class="draft-toolbar"><span id="save-status" role="status">Automatically saved on this browser</span><button type="button" id="new-persona">New persona</button></div>
+    <div class="draft-toolbar">
+        <div class="persona-library">
+            <label for="saved-personas">My personas</label>
+            <select id="saved-personas"></select>
+            <button type="button" id="new-persona">New persona</button>
+            <button type="button" id="delete-persona">Delete</button>
+            <button type="button" id="export-persona">Export persona</button>
+            <button type="button" id="import-persona">Import persona</button>
+            <input id="import-persona-file" type="file" accept="application/json,.json" hidden>
+        </div>
+        <span id="save-status" role="status">Automatically saved on this browser</span>
+    </div>
+    <div class="audience-toolbar">
+        <label for="audience-type">Audience</label>
+        <select id="audience-type" data-field="marketing"><option>B2B</option><option>B2C</option><option>B2B2C</option></select>
+        <label id="buyer-context-label" for="buyer-context" hidden>Persona represents</label>
+        <select id="buyer-context" data-field="buyer-context" hidden><option value="business">Business buyer</option><option value="consumer">End customer</option></select>
+    </div>
     <div id="warningMessage" class="warning-message">
         <strong>Warning!</strong> Your screen is too small to use this app. Please come back with a laptop or computer.
     </div>

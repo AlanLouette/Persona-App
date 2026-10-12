@@ -2,5 +2,8 @@
   "private": true,
   "dependencies": {
     "sortablejs": "^1.15.0"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.cjs"
   }
 }

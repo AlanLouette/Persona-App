@@ -207,3 +207,10 @@
 
 .persona-app .draft-toolbar { width: 90%; max-width: 1400px; padding: 14px 20px 0; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 12px; }
 .persona-app #new-persona { font-size: 12px; padding: 6px 12px; border-color: var(--line); }
+
+.persona-app .draft-toolbar { flex-wrap: wrap; align-items: flex-start; }
+.persona-app .persona-library, .persona-app .audience-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+.persona-app .persona-library :is(button, select), .persona-app .audience-toolbar select { font-size: 13px; padding: 7px 12px; width: auto; }
+.persona-app #saved-personas { max-width: 230px; }
+.persona-app .persona-library label, .persona-app .audience-toolbar label { font-size: 13px; color: var(--muted); }
+.persona-app .audience-toolbar { width: 90%; max-width: 1400px; padding: 16px 20px 0; margin: auto; }

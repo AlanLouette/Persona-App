@@ -62,12 +62,13 @@ async function exportPersonaPDF(root, color, logo = null) {
         y += 14;
     };
     const read = item => {
+        if (item.hidden) return null;
         const label = item.querySelector('label');
         if (!label) return null;
         const inputs = [...item.querySelectorAll('input, textarea, select')].filter(input => !label.contains(input));
         return {
             title: label.querySelector('input')?.value ?? label.textContent.trim(),
-            value: inputs.map(input => input.value).join('\n') || ' ',
+            value: inputs.map(input => input.dataset.field === 'marketing' && input.value === 'B2B2C' ? `${input.value} - ${document.querySelector('#buyer-context').selectedOptions[0].textContent}` : input.value).join('\n') || ' ',
             long: inputs.some(input => input.tagName === 'TEXTAREA')
         };
     };
@@ -143,7 +144,7 @@ async function exportPersonaPDF(root, color, logo = null) {
     y = Math.max(y, start + portraitHeight);
     profile.filter(field => field.long).forEach(fullField);
     y += 5;
-    section('Professional details');
+    section(document.querySelector('#audience-type').value === 'B2C' || (document.querySelector('#audience-type').value === 'B2B2C' && document.querySelector('#buyer-context').value === 'consumer') ? 'Buying details' : 'Professional details');
     fields([...root.querySelectorAll('#sortable-list-2 div.dragable-item')].map(read).filter(Boolean));
     const count = doc.internal.getNumberOfPages();
     for (let page = 1; page <= count; page++) {

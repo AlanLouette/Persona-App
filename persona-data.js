@@ -1,10 +1,8 @@
 /* Single source for questions and walkthrough copy. Keep the original wording. */
-const COMPANY_CONTEXT = "Want more qualified leads? Knowing details about your buyer persona's business will come in handy when you're building fields for your landing page forms. Factors like industry and company size also help you understand how many hats this person might be wearing on a daily basis or how competitive their market is.";
-
 const personaSteps = [
     {
         "title": "Create your avatar",
-        "description": "Start by choosing a name to humanize your buyer persona. Both the name and the avatar you select will help you start thinking about this persona like a real person. Pro tip: Consider naming your buyer persona with their industry in mind to make it easier to remember, like Marketing Mary or Finance Fred",
+        "description": "Give this persona a name you can recognise. Use an age range or approximate income if exact figures are not useful.",
         "fields": [
             {
                 "key": "name",
@@ -34,8 +32,8 @@ const personaSteps = [
         ]
     },
     {
-        "title": "Caracteristics",
-        "description": "Collecting demographic information about your buyer persona allows you to paint a clearer, more personal picture of your customer. More specifically, factors such as age and education can help you better position your marketing messaging to ensure it resonates.",
+        "title": "Characteristics",
+        "description": "Describe their situation and habits. Keep the details that help explain how they choose or use your product.",
         "fields": [
             {
                 "key": "biography",
@@ -55,7 +53,7 @@ const personaSteps = [
     },
     {
         "title": "Company",
-        "description": COMPANY_CONTEXT,
+        "description": "For a business customer, company size and sector can affect the budget and buying process. For a consumer, focus on the purchase and what they can spend.",
         "fields": [
             {
                 "key": "company-name",
@@ -78,6 +76,18 @@ const personaSteps = [
                 "type": "input"
             },
             {
+                "key": "purchase-budget",
+                "label": "Budget for this purchase :",
+                "type": "input"
+            },
+            {
+                "key": "purchase-context",
+                "label": "What are they buying, and for whom?",
+                "type": "textarea",
+                "placeholder": "Describe the purchase and who will use it.",
+                "size": "small"
+            },
+            {
                 "key": "marketing",
                 "label": "Type of Marketing :",
                 "type": "select",
@@ -91,7 +101,7 @@ const personaSteps = [
     },
     {
         "title": "Position within company",
-        "description": COMPANY_CONTEXT,
+        "description": "Who decides, who pays, and who else has a say? These may be different people.",
         "fields": [
             {
                 "key": "responsabilities",
@@ -119,7 +129,7 @@ const personaSteps = [
     },
     {
         "title": "Objectives",
-        "description": COMPANY_CONTEXT,
+        "description": "Write down the problem they want to solve and the result they expect. Use examples from customers when you can.",
         "fields": [
             {
                 "key": "pain",
@@ -139,7 +149,7 @@ const personaSteps = [
     },
     {
         "title": "People's thoughts",
-        "description": COMPANY_CONTEXT,
+        "description": "What matters when they compare options? Note their own words and the reasons they might say no.",
         "fields": [
             {
                 "key": "criteria",
@@ -166,7 +176,7 @@ const personaSteps = [
     },
     {
         "title": "Buyer Journey",
-        "description": COMPANY_CONTEXT,
+        "description": "Think about the steps before a purchase: where they hear about you, how they compare options, and what helps them take the next step.",
         "fields": [
             {
                 "key": "awarness",
@@ -193,7 +203,7 @@ const personaSteps = [
     },
     {
         "title": "What does he want ?",
-        "description": COMPANY_CONTEXT,
+        "description": "Connect your offer to their needs. Explain what you can help with and which promises you can back up.",
         "fields": [
             {
                 "key": "help",
