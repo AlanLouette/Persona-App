@@ -30,3 +30,13 @@ the selected persona color is used for the portrait border, export button and PD
 
 Layout follows alanlouette.be: 90% width, 1400px maximum, 20px horizontal
 padding and Outfit typography. The standalone page loads Outfit from Google Fonts.
+
+## Automatic saving
+
+`persona-storage.js` keeps one draft in localStorage, including answers, uploaded
+avatar and PDF logo, selected color, section order/deletions, custom sections and
+current view/step. Changes save after 300 ms and flush when leaving the page.
+The draft stays on the same browser and origin; it is not uploaded to a server
+and does not sync across devices. Clearing browser site data deletes it.
+The status indicates storage failures (for example, oversized image uploads).
+“New persona” clears the draft after confirmation.

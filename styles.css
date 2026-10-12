@@ -204,3 +204,6 @@
 .persona-app #pdf-logo-input::file-selector-button { background: var(--field); color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; margin-right: 8px; cursor: pointer; }
 .persona-app #pdf-logo-preview { max-width: 72px; max-height: 32px; object-fit: contain; }
 .persona-app #remove-pdf-logo { font-size: 12px; padding: 6px 10px; }
+
+.persona-app .draft-toolbar { width: 90%; max-width: 1400px; padding: 14px 20px 0; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 12px; }
+.persona-app #new-persona { font-size: 12px; padding: 6px 12px; border-color: var(--line); }

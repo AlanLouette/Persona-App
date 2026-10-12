@@ -58,7 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const file = target.files[0];
         if (!file) return;
         const reader = new FileReader();
-        reader.onload = () => all('#avatar-image, .avatar').forEach(img => img.src = reader.result);
+        reader.onload = () => {
+            all('#avatar-image, .avatar').forEach(img => img.src = reader.result);
+            document.dispatchEvent(new Event('persona-change'));
+        };
         reader.readAsDataURL(file);
     });
 
@@ -80,6 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
     all('div.dragable-item:not(.add-item)').forEach(decorate);
     all('#sortable-list, #sortable-list-2').forEach(list => new Sortable(list, {
         animation: 200,
+        onEnd: () => document.dispatchEvent(new Event('persona-change')),
         draggable: '.dragable-item, .justify-center',
         handle: '.drag-handle, .avatar',
         filter: 'input, textarea, select, button',
@@ -115,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 await logoPreview.decode();
                 logoPreview.hidden = false;
                 removeLogo.hidden = false;
+                document.dispatchEvent(new Event('persona-change'));
             } catch {
                 logoPreview.removeAttribute('src');
                 logoPreview.hidden = removeLogo.hidden = true;
@@ -129,6 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
         logoPreview.removeAttribute('src');
         logoPreview.hidden = removeLogo.hidden = true;
     });
+
+    setupPersonaStorage({ decorate, applyColor, resize });
 
     const exportButton = document.querySelector('#generate-pdf');
     exportButton.addEventListener('click', async () => {
