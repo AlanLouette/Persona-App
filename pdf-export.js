@@ -7,6 +7,7 @@ async function exportPersonaPDF(root, color, logo = null) {
     let y = contentTop;
     let currentSection = '';
     const personaName = root.querySelector('[data-field="name"]')?.value.trim() || '';
+    const companyName = root.querySelector('[data-field="company-name"]')?.value.trim() || '';
     let portraitHeight = 44;
     let logoData;
     if (logo) {
@@ -28,6 +29,16 @@ async function exportPersonaPDF(root, color, logo = null) {
         doc.text('Persona Canvas', left, 22);
         font(9);
         doc.setTextColor(80, 80, 80);
+        if (companyName) {
+            const companyLines = doc.splitTextToSize(companyName, 110);
+            // Keep unusually long company names within the fixed header area.
+            let displayName = companyLines[0];
+            if (companyLines.length > 1) {
+                while (doc.getTextWidth(displayName + '...') > 110) displayName = displayName.slice(0, -1);
+                displayName += '...';
+            }
+            doc.text(displayName, left, 29);
+        }
         if (logoData) {
             const ratio = logo.naturalWidth / logo.naturalHeight;
             const width = Math.min(35, 16 * ratio);
