@@ -1,10 +1,10 @@
 /* Scoped to the app so the host website keeps its own styles. */
 .persona-app {
-    --bg: #101112;
-    --field: #18191b;
+    --bg: #08091e;
+    --field: #101124;
     --text: #ecebe8;
-    --muted: #a4a4a0;
-    --line: #343537;
+    --muted: #9c9cad;
+    --line: #2c2d40;
     --accent: #a99cc8;
     margin: 0;
     color: var(--text);
@@ -35,7 +35,7 @@
     min-width: 0;
     padding: 12px 14px;
     border: 1px solid var(--line);
-    border-radius: 4px;
+    border-radius: 10px;
     background: var(--field);
     color: var(--text);
     font-size: 14px;
@@ -45,7 +45,7 @@
 .persona-app textarea { resize: vertical; min-height: 110px; }
 .persona-app .small-textarea { min-height: 100px; }
 .persona-app .big-textarea { min-height: 140px; }
-.persona-app ::placeholder { color: #9397ad; opacity: 1; font-size: 13px; }
+.persona-app ::placeholder { color: #8b8b9d; opacity: 1; font-size: 13px; }
 .persona-app label { color: var(--text); font-size: 13px; font-weight: 500; line-height: 1.5; }
 
 /* Guided questions share the same dark page, separated only by a fine rule. */
@@ -135,7 +135,7 @@
 .persona-app #overview-title { font-size: 42px; font-weight: 500; letter-spacing: -.04em; }
 .persona-app .overview-section-title { grid-column: 1 / -1; border-top: 1px solid var(--line); padding: 22px 0 4px; margin-top: 24px; font-size: 17px; font-weight: 500; color: var(--text); }
 .persona-app .overview-section-title:first-child { border: 0; padding-top: 0; margin-top: 0; }
-.persona-app .overview input[type=text] { background: transparent; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; padding: 10px 0; }
+.persona-app .overview input[type=text] { background: var(--field); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
 .persona-app .overview input[type=text]:focus { border-color: var(--accent); }
 .persona-app .overview label { font-weight: 400; color: #c5c5c0; }
 .persona-app .overview .new-title { padding: 0; }
