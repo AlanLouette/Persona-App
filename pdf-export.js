@@ -3,7 +3,7 @@ async function exportPersonaPDF(root, color, logo = null) {
     const doc = new jsPDF('p', 'mm', 'a4');
     const rgb = color.match(/\w\w/g).map(channel => parseInt(channel, 16));
     const left = 18, right = 192, bottom = 278, line = 5;
-    const contentTop = 47;
+    const contentTop = 50;
     let y = contentTop;
     let currentSection = '';
     const personaName = root.querySelector('[data-field="name"]')?.value.trim() || '';
@@ -41,14 +41,14 @@ async function exportPersonaPDF(root, color, logo = null) {
         }
         if (logoData) {
             const ratio = logo.naturalWidth / logo.naturalHeight;
-            const width = Math.min(35, 16 * ratio);
+            const width = Math.min(35, 14 * ratio);
             const height = width / ratio;
-            doc.addImage(logoData, 'PNG', right - width, 11 + (16 - height) / 2, width, height);
+            doc.addImage(logoData, 'PNG', right - width, 10 + (14 - height) / 2, width, height);
         }
-        if (currentSection) doc.text(currentSection, right, 29, { align: 'right' });
+        if (currentSection) doc.text(currentSection, right, 32, { align: 'right' });
         doc.setDrawColor(220, 220, 230);
         doc.setLineWidth(0.3);
-        doc.line(left, 35, right, 35);
+        doc.line(left, 39, right, 39);
     };
     const nextPage = () => { doc.addPage(); header(); y = contentTop; };
     const section = title => {
