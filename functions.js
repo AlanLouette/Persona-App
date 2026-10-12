@@ -12,6 +12,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Keep the filled form in the DOM so moving between views preserves answers.
+    const showOverview = () => {
+        walkthrough.hidden = true;
+        overview.hidden = false;
+        all('.overview textarea').forEach(resize);
+        window.scrollTo(0, 0);
+        document.querySelector('#overview-title').focus({ preventScroll: true });
+    };
+    const changeStep = button => {
+        const current = button.closest('section');
+        const next = button.matches('.next-button') ? current.nextElementSibling : current.previousElementSibling;
+        if (!next) return;
+        current.hidden = true;
+        next.hidden = false;
+        next.querySelector('.right input, .right textarea, .right select')?.focus();
+    };
+
     document.addEventListener('input', ({ target }) => {
         const field = fields.find(name => target.classList.contains(name));
         if (field) all(`.${field}`).forEach(input => {
@@ -30,21 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.addEventListener('click', ({ target }) => {
+        if (target.closest('[data-action="choose-avatar"]')) {
+            document.querySelector('#avatar-input').click();
+        }
         const button = target.closest('button, .delete-icon');
         if (!button) return;
-        if (button.matches('.button-walk')) {
-            walkthrough.style.display = 'none';
-            overview.style.display = 'block';
-            all('.overview textarea').forEach(resize);
-        }
-        if (button.matches('.next-button, .prev-button')) {
-            const current = button.closest('section');
-            const next = button.matches('.next-button') ? current.nextElementSibling : current.previousElementSibling;
-            if (next) {
-                current.classList.add('hide');
-                next.classList.remove('hide');
-            }
-        }
+        if (button.matches('.button-walk')) showOverview();
+        if (button.matches('.next-button, .prev-button')) changeStep(button);
         if (button.matches('.delete-icon')) button.closest('.dragable-item').remove();
     });
 
@@ -77,8 +86,9 @@ document.addEventListener('DOMContentLoaded', () => {
     color.addEventListener('change', applyColor);
     applyColor();
 
-    window.CreatePDFfromHTML = async () => {
-        const button = document.querySelector('[onclick="CreatePDFfromHTML()"]');
+    const exportButton = document.querySelector('#generate-pdf');
+    exportButton.addEventListener('click', async () => {
+        const button = exportButton;
         button.disabled = true;
         try {
             await exportPersonaPDF(document.querySelector('.printable'), color.value);
@@ -88,9 +98,5 @@ document.addEventListener('DOMContentLoaded', () => {
         } finally {
             button.disabled = false;
         }
-    };
-    if (window.innerWidth <= 980) {
-        document.querySelector('#warningMessage').style.display = 'block';
-        walkthrough.style.display = 'none';
-    }
+    });
 });

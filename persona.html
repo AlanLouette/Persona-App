@@ -41,7 +41,7 @@
                     <div class="column-padding">
                         <h3 class="page-title">Step 1/8 : Create your avatar</h3>
                         <label for="avatar">Pick your avatar:</label>
-                        <div id="avatar-wrapper" onclick="document.getElementById('avatar-input').click();">
+                        <div id="avatar-wrapper" data-action="choose-avatar">
                             <img id="avatar-image" style="max-width: 125px; max-height: 125px;" src="default-avatar.svg" />
                         </div>
                         <input type="file" id="avatar-input" accept="image/*" style="display:none;" />
@@ -67,7 +67,7 @@
 
                 </div>
             </section>
-            <section id="2" class="second-page hide">
+            <section id="2" class="second-page" hidden>
                 <div class="column left blue">
                     <div class="column-padding">
                         <div id="selected-avatar-wrapper">
@@ -94,7 +94,7 @@
                     </div>
                 </div>
             </section>
-            <section id="3" class="third-page hide">
+            <section id="3" class="third-page" hidden>
                 <div class="column left">
                     <div class="column-padding">
                         <div id="selected-avatar-wrapper">
@@ -135,7 +135,7 @@
                     </div>
                 </div>
             </section>
-            <section id="4" class="fourth-page hide">
+            <section id="4" class="fourth-page" hidden>
                 <div class="column left">
                     <div class="column-padding">
                         <div id="selected-avatar-wrapper">
@@ -169,7 +169,7 @@
                     </div>
                 </div>
             </section>
-            <section id="5" class="fifth-page hide">
+            <section id="5" class="fifth-page" hidden>
                 <div class="column left">
                     <div class="column-padding">
                         <div id="selected-avatar-wrapper">
@@ -197,7 +197,7 @@
                     </div>
                 </div>
             </section>
-            <section id="6" class="sixth-page hide">
+            <section id="6" class="sixth-page" hidden>
                 <div class="column left">
                     <div class="column-padding">
                         <div id="selected-avatar-wrapper">
@@ -227,7 +227,7 @@
                     </div>
                 </div>
             </section>
-            <section id="7" class="seventh-page hide">
+            <section id="7" class="seventh-page" hidden>
                 <div class="column left">
                     <div class="column-padding">
                         <div id="selected-avatar-wrapper">
@@ -258,7 +258,7 @@
 
                 </div>
             </section>
-            <section id="8" class="eighth-page hide">
+            <section id="8" class="eighth-page" hidden>
                 <div class="column left">
                     <div class="column-padding">
                         <div id="selected-avatar-wrapper">
@@ -299,7 +299,7 @@
 
 
 
-    <div class="overview">
+    <div class="overview" hidden>
         <div class="share-container">
             <div class="share-text">
                 Share this app
@@ -320,7 +320,7 @@
             </div>
         </div>
         <div class="header-overview">
-            <h2 style="color:white;text-align: center; font-size: 50px;">Make my Persona</h2>
+            <h2 id="overview-title" tabindex="-1" style="color:white;text-align: center; font-size: 50px;">Make my Persona</h2>
             <div class="title-overview">
                 <div class="title-overview-col1">
                     <div class="color-label">
@@ -331,7 +331,7 @@
                     </div>
                 </div>
                 <div class="title-overview-col2">
-                    <button style="width:auto" onclick="CreatePDFfromHTML()">Generate PDF</button>
+                    <button style="width:auto" id="generate-pdf">Generate PDF</button>
                 </div>
             </div>
         </div>
@@ -350,7 +350,7 @@
 
                     <div class="column-padding-2">
                         <div id="sortable-list">
-                            <div class="justify-center" onclick="document.getElementById('avatar-input').click();">
+                            <div class="justify-center" data-action="choose-avatar">
                                 <img class="avatar dragable-item" src="default-avatar.svg" />
                             </div>
                             <div class="dragable-item">

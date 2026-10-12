@@ -180,8 +180,8 @@ label {
     /*   height: 45rem; */
 }
 
-.hide {
-    display: none;
+[hidden] {
+    display: none !important;
 }
 
 
@@ -294,8 +294,6 @@ Overview page
 }
 
 .overview {
-
-    display: none;
     background-position: left center;
     background-blend-mode: multiply;
     background-image: url(black-bg.jpg);
@@ -608,11 +606,10 @@ Overview page
     height: 100vh;
 }
 
-/* Responsive media query to hide the warning message on screens wider than 980px */
-@media screen and (min-width: 981px) {
-    .warning-message {
-        display: none;
-    }
+/* The screen-size restriction is presentation, independent of the active view. */
+@media screen and (max-width: 980px) {
+    .warning-message { display: block; }
+    .walkthrough, .overview { display: none; }
 }
 /* Editor controls. */
 .overview input, .overview textarea, .overview select { min-width: 0; width: 100%; box-sizing: border-box; }
