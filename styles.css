@@ -187,11 +187,11 @@ label {
 
 
 /* Column 1 */
-#selected-avatar-wrapper {
+.selected-avatar-wrapper {
     text-align: center;
 }
 
-#selected-avatar-image {
+.walkthrough-avatar {
     width: 250px;
     height: 250px;
     object-fit: cover;
@@ -618,3 +618,8 @@ Overview page
 button.delete-icon { padding: 2px 6px !important; margin: 0; border: 0; background: transparent; color: grey; font-size: 14px !important; }
 button:disabled { opacity: .6; cursor: wait; }
 button:focus-visible, .share-icons a:focus-visible { outline: 2px solid #DAB667; outline-offset: 4px; }
+
+.walkthrough-avatar { max-width: 200px; max-height: 200px; }
+#avatar-image { max-width: 125px; max-height: 125px; }
+
+#overview-title { color: white; text-align: center; font-size: 50px; }

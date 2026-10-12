@@ -1,8 +1,7 @@
 <?php /* Template Name: Template App Persona */ ?>
 
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -10,294 +9,20 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js" integrity="sha512-Eezs+g9Lq4TCCq0wae01s9PuNWzHYoCMkE97e2qdkYthpI0pzC3UGB03lgEHn2XM85hDOUF6qgqqszs+iXU4UA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script defer src="pdf-export.js"></script>
+    <script defer src="pdf-export.js"></script>
+    <script defer src="persona-data.js"></script>
+    <script defer src="persona-render.js"></script>
     <script defer src="functions.js"></script>
-
-
 
 </head>
 
 <body>
-    
     <div id="warningMessage" class="warning-message">
-    <strong>Warning!</strong> Your screen is too small to use this app. Please come back with a laptop or computer.
-</div>
-    <div class="walkthrough">
-        <div class="walk-container">
-            <section id="1" class="first-page">
-
-                <div class="column left curve">
-                    <div class="column-padding">
-                        <div id="selected-avatar-wrapper">
-                            <img class="avatar" id="selected-avatar-image" style="max-width: 200px; max-height: 200px;" src="default-avatar.svg" />
-                            <input class="name avatar-name" type="text" />
-                        </div>
-                        <h2>Why is this step important ?</h2>
-                        <p>Start by choosing a name to humanize your buyer persona. Both the name and the avatar you select will help you start thinking about this persona like a real person. Pro tip: Consider naming your buyer persona with their industry in mind to make it easier to remember, like Marketing Mary or Finance Fred</p>
-                        <button class="button-walk">Skip Walkthrough mode</button>
-                    </div>
-                </div>
-                <div class="column right">
-                    <div class="column-padding">
-                        <h3 class="page-title">Step 1/8 : Create your avatar</h3>
-                        <label for="avatar">Pick your avatar:</label>
-                        <div id="avatar-wrapper" data-action="choose-avatar">
-                            <img id="avatar-image" style="max-width: 125px; max-height: 125px;" src="default-avatar.svg" />
-                        </div>
-                        <input type="file" id="avatar-input" accept="image/*" style="display:none;" />
-
-                        <label for="name">Name your persona :</label>
-                        <input type="text" class="name" />
-
-                        <label for="age">How old are they ? :</label>
-                        <input type="text" class="age" />
-
-                        <label for="income">Income ? :</label>
-                        <input type="text" class="income" />
-
-                        <label for="function">What is your function ? :</label>
-                        <input type="text" class="function" />
-
-                        <label for="gender">Gender ? :</label>
-                        <input type="text" class="gender" />
-                    </div>
-                    <div class="buttons-section">
-                        <button class="next-button">Next</button>
-                    </div>
-
-                </div>
-            </section>
-            <section id="2" class="second-page" hidden>
-                <div class="column left blue">
-                    <div class="column-padding">
-                        <div id="selected-avatar-wrapper">
-                            <img class="avatar" id="selected-avatar-image-2" style="max-width: 200px; max-height: 200px;" src="default-avatar.svg" />
-                            <input class="name avatar-name" type="text" />
-                        </div>
-                        <h2>Why is this step important ?</h2>
-                        <p>Collecting demographic information about your buyer persona allows you to paint a clearer, more personal picture of your customer. More specifically, factors such as age and education can help you better position your marketing messaging to ensure it resonates.</p>
-                        <button class="button-walk">Skip Walkthrough mode</button>
-                    </div>
-                </div>
-                <div class="column right">
-                    <div class="column-padding">
-                        <h3 class="page-title">Step 2/8 : Caracteristics</h3>
-                        <label for="biography">His biography :</label>
-                        <textarea class="biography small-textarea" placeholder="Hier komt een korte biografische beschrijving van je persona."></textarea>
-
-                        <label for="behaviour">Tell us about his behaviour ? :</label>
-                        <textarea class="behaviour small-textarea" placeholder="Hier komen specifieke karaktertrekken of gewoontes van deze persona."></textarea>
-                    </div>
-                    <div class="buttons-section">
-                        <button class="prev-button">Previous</button>
-                        <button class="next-button">Next</button>
-                    </div>
-                </div>
-            </section>
-            <section id="3" class="third-page" hidden>
-                <div class="column left">
-                    <div class="column-padding">
-                        <div id="selected-avatar-wrapper">
-                            <img class="avatar" id="selected-avatar-image-3" style="max-width: 200px; max-height: 200px;" src="default-avatar.svg" />
-                            <input class="name avatar-name" type="text" />
-                        </div>
-                        <h2>Why is this step important ?</h2>
-                        <p>Want more qualified leads? Knowing details about your buyer persona's business will come in handy when you're building fields for your landing page forms. Factors like industry and company size also help you understand how many hats this person might be wearing on a daily basis or how competitive their market is.</p>
-                        <button class="button-walk">Skip Walkthrough mode</button>
-                    </div>
-                </div>
-                <div class="column right">
-                    <div class="column-padding">
-                        <h3 class="page-title">Step 3/8 : Company</h3>
-                        <label for="company-name">Name of the company :</label>
-                        <input type="text" class="company-name" />
-
-                        <label for="sector">Sector :</label>
-                        <input type="text" class="sector" />
-
-                        <label for="company-size">Company size :</label>
-                        <input type="text" class="company-size" />
-
-                        <label for="turnover">Turnover :</label>
-                        <input type="text" class="turnover" />
-
-
-                        <label for="marketing">Type of Marketing :</label>
-                        <select class="marketing" name="marketing-type">
-                            <option value="B2B">B2B</option>
-                            <option value="B2C">B2C</option>
-                            <option value="B2B2C">B2B2C</option>
-                        </select>
-                    </div>
-                    <div class="buttons-section">
-                        <button class="prev-button">Previous</button>
-                        <button class="next-button">Next</button>
-                    </div>
-                </div>
-            </section>
-            <section id="4" class="fourth-page" hidden>
-                <div class="column left">
-                    <div class="column-padding">
-                        <div id="selected-avatar-wrapper">
-                            <img class="avatar" id="selected-avatar-image-4" style="max-width: 200px; max-height: 200px;" src="default-avatar.svg" />
-                            <input class="name avatar-name" type="text" />
-                        </div>
-                        <h2>Why is this step important ?</h2>
-                        <p>Want more qualified leads? Knowing details about your buyer persona's business will come in handy when you're building fields for your landing page forms. Factors like industry and company size also help you understand how many hats this person might be wearing on a daily basis or how competitive their market is.</p>
-                        <button class="button-walk">Skip Walkthrough mode</button>
-                    </div>
-                </div>
-                <div class="column right">
-                    <div class="column-padding">
-                        <h3 class="page-title">Step 4/8 : Position within company</h3>
-                        <label for="responsabilities">Responsabilities :</label>
-                        <input type="text" class="responsabilities" />
-
-                        <label for="report-to">Report to :</label>
-                        <input type="text" class="report-to" />
-
-                        <label for="manager-of">Manager of :</label>
-                        <input type="text" class="manager-of" />
-
-                        <label for="role">Role in decision making process :</label>
-                        <textarea class="role big-textarea" placeholder="Specificeer de rol in het besluitvormingsproces"></textarea>
-
-                    </div>
-                    <div class="buttons-section">
-                        <button class="prev-button">Previous</button>
-                        <button class="next-button">Next</button>
-                    </div>
-                </div>
-            </section>
-            <section id="5" class="fifth-page" hidden>
-                <div class="column left">
-                    <div class="column-padding">
-                        <div id="selected-avatar-wrapper">
-                            <img class="avatar" id="selected-avatar-image-5" style="max-width: 200px; max-height: 200px;" src="default-avatar.svg" />
-                            <input class="name avatar-name" type="text" />
-                        </div>
-                        <h2>Why is this step important ?</h2>
-                        <p>Want more qualified leads? Knowing details about your buyer persona's business will come in handy when you're building fields for your landing page forms. Factors like industry and company size also help you understand how many hats this person might be wearing on a daily basis or how competitive their market is.</p>
-                        <button class="button-walk">Skip Walkthrough mode</button>
-                    </div>
-                </div>
-                <div class="column right">
-                    <div class="column-padding">
-                        <h3 class="page-title">Step 5/8 : Objectives</h3>
-                        <label for="pain">Frustrations (pain points) :</label>
-                        <textarea class="pain big-textarea" placeholder="Wat is het probleem dat je persona graag wilt oplossen? Wat zijn hun frustraties? Wat houdt hun tegen hun maximale potentieel te bereiken?"></textarea>
-
-                        <label for="goals">Motivation (goals) :</label>
-                        <textarea class="goals big-textarea" placeholder="Welk doel heeft jouw persona in zijn/haar job? Wat zijn de belangrijkste motivaties?"></textarea>
-
-                    </div>
-                    <div class="buttons-section">
-                        <button class="prev-button">Previous</button>
-                        <button class="next-button">Next</button>
-                    </div>
-                </div>
-            </section>
-            <section id="6" class="sixth-page" hidden>
-                <div class="column left">
-                    <div class="column-padding">
-                        <div id="selected-avatar-wrapper">
-                            <img class="avatar" id="selected-avatar-image-6" style="max-width: 200px; max-height: 200px;" src="default-avatar.svg" />
-                            <input class="name avatar-name" type="text" />
-                        </div>
-                        <h2>Why is this step important ?</h2>
-                        <p>Want more qualified leads? Knowing details about your buyer persona's business will come in handy when you're building fields for your landing page forms. Factors like industry and company size also help you understand how many hats this person might be wearing on a daily basis or how competitive their market is.</p>
-                        <button class="button-walk">Skip Walkthrough mode</button>
-                    </div>
-                </div>
-                <div class="column right">
-                    <div class="column-padding">
-                        <h3 class="page-title">Step 6/8 : People's thoughts</h3>
-                        <label for="criteria">Decision criteria :</label>
-                        <textarea class="criteria small-textarea" placeholder="Op basis van welke criteria beslist jouw persona om al dan niet met jouw in zee te gaan? Op basis van welke criteria gaat hij jou als voorkeurspartner naar voren schuiven bij z’n baas?"></textarea>
-
-                        <label for="quotes">Real quotes :</label>
-                        <textarea class="quotes small-textarea" placeholder="Wat zijn enkele echte citaten van jouw persona? Wat hebben bestaande klanten van jou al gezegd?"></textarea>
-
-                        <label for="objections">Common objections :</label>
-                        <textarea class="objections small-textarea" placeholder="Welke bezwaren heeft deze persona waarom hij niet met jou in zee kan gaan? Wat kan hem potentieel tegenhouden?"></textarea>
-                    </div>
-                    <div class="buttons-section">
-                        <button class="prev-button">Previous</button>
-                        <button class="next-button">Next</button>
-                    </div>
-                </div>
-            </section>
-            <section id="7" class="seventh-page" hidden>
-                <div class="column left">
-                    <div class="column-padding">
-                        <div id="selected-avatar-wrapper">
-                            <img class="avatar" id="selected-avatar-image-7" style="max-width: 200px; max-height: 200px;" src="default-avatar.svg" />
-                            <input class="name avatar-name" type="text" />
-                        </div>
-                        <h2>Why is this step important ?</h2>
-                        <p>Want more qualified leads? Knowing details about your buyer persona's business will come in handy when you're building fields for your landing page forms. Factors like industry and company size also help you understand how many hats this person might be wearing on a daily basis or how competitive their market is.</p>
-                        <button class="button-walk">Skip Walkthrough mode</button>
-                    </div>
-                </div>
-                <div class="column right">
-                    <div class="column-padding">
-                        <h3 class="page-title">Step 7/8 : Buyer Journey</h3>
-                        <label for="awarness">Awarness :</label>
-                        <textarea class="awarness big-textarea" placeholder="Hoe, waar en wanneer wordt je persona zich bewust van jou bedrijf, dienst of sector?"></textarea>
-
-                        <label for="consideration">Consideration :</label>
-                        <textarea class="consideration big-textarea" placeholder="Via welke kanalen hou je deze persona geïnformeerd? Hoe zorg je dat hij/zij aan jou denkt en niet aan je concurrenten?"></textarea>
-
-                        <label for="action">Action :</label>
-                        <textarea class="action big-textarea" placeholder="Op welke manieren kan je persona de stap zetten om met jou in zee te gaan of z’n gegevens achter te laten?"></textarea>
-                    </div>
-                    <div class="buttons-section">
-                        <button class="prev-button">Previous</button>
-                        <button class="next-button">Next</button>
-                    </div>
-
-                </div>
-            </section>
-            <section id="8" class="eighth-page" hidden>
-                <div class="column left">
-                    <div class="column-padding">
-                        <div id="selected-avatar-wrapper">
-                            <img class="avatar" id="selected-avatar-image-7" style="max-width: 200px; max-height: 200px;" src="default-avatar.svg" />
-                            <input class="name avatar-name" type="text" />
-                        </div>
-                        <h2>Why is this step important ?</h2>
-                        <p>Want more qualified leads? Knowing details about your buyer persona's business will come in handy when you're building fields for your landing page forms. Factors like industry and company size also help you understand how many hats this person might be wearing on a daily basis or how competitive their market is.</p>
-                        <button class="button-walk">Skip Walkthrough mode</button>
-                    </div>
-                </div>
-                <div class="column right">
-                    <div class="column-padding">
-                        <h3 class="page-title">Step 8/8 : What does he want ?</h3>
-                        <label for="help">How can you help your persona ?</label>
-                        <textarea class="help big-textarea" placeholder="Wat kan jij doen om deze persona te helpen met zijn frustraties weg te werken en zijn doelen te behalen?"></textarea>
-
-                        <label for="marketing-message">Marketing message :</label>
-                        <textarea class="marketing-message big-textarea" placeholder="Op basis van al het voorgaande: hoe pitch je jouw dienst of product aan deze persona? Wat zijn de belangrijkste USPs?"></textarea>
-                    </div>
-                    <div class="buttons-section">
-                        <button class="prev-button">Previous</button>
-                        <button class="button-walk confirm">Confirm</button>
-                    </div>
-
-                </div>
-            </section>
-        </div>
-        <br />
+        <strong>Warning!</strong> Your screen is too small to use this app. Please come back with a laptop or computer.
     </div>
-
-
-
-
-
-
-
-
-
+    <div class="walkthrough">
+        <div class="walk-container"></div>
+    </div>
 
     <div class="overview" hidden>
         <div class="share-container">
@@ -320,18 +45,18 @@
             </div>
         </div>
         <div class="header-overview">
-            <h2 id="overview-title" tabindex="-1" style="color:white;text-align: center; font-size: 50px;">Make my Persona</h2>
+            <h2 id="overview-title" tabindex="-1">Make my Persona</h2>
             <div class="title-overview">
                 <div class="title-overview-col1">
                     <div class="color-label">
-                        <label>Choose your main color : </label>
+                        <label for="input-color">Choose your main color : </label>
                     </div>
                     <div class="input-color-container">
                         <input aria-label="Choose your main color" id="input-color" value="#DAB667" class="input-color" type="color">
                     </div>
                 </div>
                 <div class="title-overview-col2">
-                    <button style="width:auto" id="generate-pdf">Generate PDF</button>
+                    <button type="button" id="generate-pdf">Generate PDF</button>
                 </div>
             </div>
         </div>
@@ -349,168 +74,18 @@
                 <div class="overview-left">
 
                     <div class="column-padding-2">
-                        <div id="sortable-list">
-                            <div class="justify-center" data-action="choose-avatar">
-                                <img class="avatar dragable-item" src="default-avatar.svg" />
-                            </div>
-                            <div class="dragable-item">
-                                <label for="name">Name your persona :</label>
-                                <input type="text" class="name" />
-                            </div>
-
-                            <div class="dragable-item">
-                                <label for="age">How old are they ? :</label>
-                                <input type="text" class="age" />
-                            </div>
-
-                            <div class="dragable-item">
-                                <label for="income">Income ? :</label>
-                                <input type="text" class="income" />
-                            </div>
-
-                            <div class="dragable-item">
-                                <label for="function">What is your function ? :</label>
-                                <input type="text" class="function" />
-
-                            </div>
-
-                            <div class="dragable-item">
-                                <label for="gender">Gender ? :</label>
-                                <input type="text" class="gender" />
-                            </div>
-                            <div class="dragable-item">
-                                <label for="biography">His biography :</label>
-                                <textarea class="biography small-textarea" placeholder="Hier komt een korte biografische beschrijving van je persona."></textarea>
-
-                            </div>
-                            <div class="dragable-item">
-
-                                <label for="behaviour">Tell us about his behaviour ? :</label>
-                                <textarea class="behaviour small-textarea" placeholder="Hier komen specifieke karaktertrekken of gewoontes van deze persona."></textarea>
-                            </div>
-                        </div>
+                        <div id="sortable-list"></div>
                     </div>
                 </div>
                 <div class="overview-right">
                     <div class="overview-grid">
-                        <div id="sortable-list-2">
-                            <div class="dragable-item">
-                                <label for="company-name">Name of the company :</label>
-                                <input type="text" class="company-name" />
-                            </div>
-
-                            <div class="dragable-item">
-
-                                <label for="sector">Sector :</label>
-                                <input type="text" class="sector" />
-                            </div>
-
-                            <div class="dragable-item">
-
-                                <label for="company-size">Company size :</label>
-                                <input type="text" class="company-size" />
-
-                            </div>
-
-                            <div class="dragable-item">
-
-                                <label for="turnover">Turnover :</label>
-                                <input type="text" class="turnover" />
-
-                            </div>
-
-                            <div class="dragable-item">
-
-                                <label for="marketing">Type of Marketing :</label>
-                                <select class="marketing" name="marketing-type">
-                                    <option value="B2B">B2B</option>
-                                    <option value="B2C">B2C</option>
-                                    <option value="B2B2C">B2B2C</option>
-                                </select>
-                            </div>
-
-                            <div class="dragable-item">
-                                <label for="responsabilities">Responsabilities :</label>
-                                <input type="text" class="responsabilities" />
-                            </div>
-
-                            <div class="dragable-item">
-
-                                <label for="report-to">Report to :</label>
-                                <input type="text" class="report-to" />
-                            </div>
-
-                            <div class="dragable-item">
-
-                                <label for="manager-of">Manager of :</label>
-                                <input type="text" class="manager-of" />
-                            </div>
-
-                            <div class="dragable-item">
-                                <label for="role">Role in decision making process :</label>
-                                <textarea class="role big-textarea" placeholder="Specificeer de rol in het besluitvormingsproces"></textarea>
-                            </div>
-                            <div class="dragable-item">
-                                <label for="pain">Frustrations (pain points) :</label>
-                                <textarea class="pain big-textarea" placeholder="Wat is het probleem dat je persona graag wilt oplossen? Wat zijn hun frustraties? Wat houdt hun tegen hun maximale potentieel te bereiken?"></textarea>
-                            </div>
-
-                            <div class="dragable-item">
-
-                                <label for="goals">Motivation (goals) :</label>
-                                <textarea class="goals big-textarea" placeholder="Welk doel heeft jouw persona in zijn/haar job? Wat zijn de belangrijkste motivaties?"></textarea>
-                            </div>
-
-                            <div class="dragable-item">
-                                <label for="criteria">Decision criteria :</label>
-                                <textarea class="criteria small-textarea" placeholder="Op basis van welke criteria beslist jouw persona om al dan niet met jouw in zee te gaan? Op basis van welke criteria gaat hij jou als voorkeurspartner naar voren schuiven bij z’n baas?"></textarea>
-                            </div>
-
-                            <div class="dragable-item">
-                                <label for="quotes">Real quotes :</label>
-                                <textarea class="quotes small-textarea" placeholder="Wat zijn enkele echte citaten van jouw persona? Wat hebben bestaande klanten van jou al gezegd?"></textarea>
-                            </div>
-
-                            <div class="dragable-item">
-
-                                <label for="objections">Common objections :</label>
-                                <textarea class="objections small-textarea" placeholder="Welke bezwaren heeft deze persona waarom hij niet met jou in zee kan gaan? Wat kan hem potentieel tegenhouden?"></textarea>
-                            </div>
-
-                            <div class="dragable-item">
-                                <label for="awarness">Awarness :</label>
-                                <textarea class="awarness big-textarea" placeholder="Hoe, waar en wanneer wordt je persona zich bewust van jou bedrijf, dienst of sector?"></textarea>
-                            </div>
-
-                            <div class="dragable-item">
-
-                                <label for="consideration">Consideration :</label>
-                                <textarea class="consideration big-textarea" placeholder="Via welke kanalen hou je deze persona geïnformeerd? Hoe zorg je dat hij/zij aan jou denkt en niet aan je concurrenten?"></textarea>
-                            </div>
-
-                            <div class="dragable-item">
-
-                                <label for="action">Action :</label>
-                                <textarea class="action big-textarea" placeholder="Op welke manieren kan je persona de stap zetten om met jou in zee te gaan of z’n gegevens achter te laten?"></textarea>
-
-                            </div>
-
-                            <div class="dragable-item">
-                                <label for="help">How can you help your persona ?</label>
-                        <textarea class="help big-textarea" placeholder="Wat kan jij doen om deze persona te helpen met zijn frustraties weg te werken en zijn doelen te behalen?"></textarea>
-                            </div>
-                            <div class="dragable-item">
-                                <label for="marketing-message">Marketing message :</label>
-                        <textarea class="marketing-message big-textarea" placeholder="Op basis van al het voorgaande: hoe pitch je jouw dienst of product aan deze persona? Wat zijn de belangrijkste USPs?"></textarea>
-                            </div>
-                        </div>
+                        <div id="sortable-list-2"></div>
                         <div id="add-item-btn" class="dragable-item add-item">Add New Section +</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 
 </body>
 

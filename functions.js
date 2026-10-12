@@ -1,7 +1,7 @@
-/* Interface behavior. Questions and explanatory copy remain in persona.html. */
+/* Interface behavior; markup comes from persona-render.js and persona-data.js. */
 document.addEventListener('DOMContentLoaded', () => {
+    renderPersona();
     const all = selector => [...document.querySelectorAll(selector)];
-    const fields = 'name age income function gender biography behaviour company-name sector company-size turnover marketing responsabilities report-to manager-of role pain goals criteria quotes objections awarness consideration action help marketing-message'.split(' ');
     const overview = document.querySelector('.overview');
     const walkthrough = document.querySelector('.walkthrough');
     const color = document.querySelector('#input-color');
@@ -30,8 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     document.addEventListener('input', ({ target }) => {
-        const field = fields.find(name => target.classList.contains(name));
-        if (field) all(`.${field}`).forEach(input => {
+        const field = target.dataset.field;
+        if (field) all(`[data-field="${field}"]`).forEach(input => {
             input.value = target.value;
             resize(input);
         });
