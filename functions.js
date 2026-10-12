@@ -102,12 +102,40 @@ document.addEventListener('DOMContentLoaded', () => {
     color.addEventListener('change', applyColor);
     applyColor();
 
+    const logoInput = document.querySelector('#pdf-logo-input');
+    const logoPreview = document.querySelector('#pdf-logo-preview');
+    const removeLogo = document.querySelector('#remove-pdf-logo');
+    logoInput.addEventListener('change', () => {
+        const file = logoInput.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = async () => {
+            logoPreview.src = reader.result;
+            try {
+                await logoPreview.decode();
+                logoPreview.hidden = false;
+                removeLogo.hidden = false;
+            } catch {
+                logoPreview.removeAttribute('src');
+                logoPreview.hidden = removeLogo.hidden = true;
+                logoInput.value = '';
+                alert('Please choose a valid PNG, JPEG or WebP logo.');
+            }
+        };
+        reader.readAsDataURL(file);
+    });
+    removeLogo.addEventListener('click', () => {
+        logoInput.value = '';
+        logoPreview.removeAttribute('src');
+        logoPreview.hidden = removeLogo.hidden = true;
+    });
+
     const exportButton = document.querySelector('#generate-pdf');
     exportButton.addEventListener('click', async () => {
         const button = exportButton;
         button.disabled = true;
         try {
-            await exportPersonaPDF(document.querySelector('.printable'), color.value);
+            await exportPersonaPDF(document.querySelector('.printable'), color.value, logoPreview.hasAttribute('src') ? logoPreview : null);
         } catch (error) {
             console.error('PDF export failed', error);
             alert('Unable to generate the PDF. Please try again.');

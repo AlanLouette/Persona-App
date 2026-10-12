@@ -1,5 +1,5 @@
 /* A text-based A4 report: profile first, followed by professional details. */
-async function exportPersonaPDF(root, color) {
+async function exportPersonaPDF(root, color, logo = null) {
     const doc = new jsPDF('p', 'mm', 'a4');
     const rgb = color.match(/\w\w/g).map(channel => parseInt(channel, 16));
     const left = 18, right = 192, bottom = 278, line = 5;
@@ -8,6 +8,16 @@ async function exportPersonaPDF(root, color) {
     let currentSection = '';
     const personaName = root.querySelector('[data-field="name"]')?.value.trim() || '';
     let portraitHeight = 44;
+    let logoData;
+    if (logo) {
+        await logo.decode();
+        const canvas = document.createElement('canvas');
+        const scale = Math.min(1, 1000 / Math.max(logo.naturalWidth, logo.naturalHeight));
+        canvas.width = Math.max(1, Math.round(logo.naturalWidth * scale));
+        canvas.height = Math.max(1, Math.round(logo.naturalHeight * scale));
+        canvas.getContext('2d').drawImage(logo, 0, 0, canvas.width, canvas.height);
+        logoData = canvas.toDataURL('image/png');
+    }
     const font = (size, bold = false) => {
         doc.setFontSize(size);
         doc.setFontStyle(bold ? 'bold' : 'normal');
@@ -18,7 +28,12 @@ async function exportPersonaPDF(root, color) {
         doc.text('Persona Canvas', left, 22);
         font(9);
         doc.setTextColor(80, 80, 80);
-        doc.text('by BeMarketing Group', left, 29);
+        if (logoData) {
+            const ratio = logo.naturalWidth / logo.naturalHeight;
+            const width = Math.min(35, 16 * ratio);
+            const height = width / ratio;
+            doc.addImage(logoData, 'PNG', right - width, 11 + (16 - height) / 2, width, height);
+        }
         if (currentSection) doc.text(currentSection, right, 29, { align: 'right' });
         doc.setDrawColor(220, 220, 230);
         doc.setLineWidth(0.3);

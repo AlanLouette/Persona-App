@@ -196,3 +196,11 @@
     .persona-app .confirm::before, .persona-app .next-button::before, .persona-app #generate-pdf::before { animation: none; }
     .persona-app .confirm::after, .persona-app .next-button::after, .persona-app #generate-pdf::after { transition: none; }
 }
+
+.persona-app .title-overview { flex-wrap: wrap; }
+.persona-app .pdf-logo-control { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+.persona-app .pdf-logo-control label { color: var(--muted); font-size: 12px; }
+.persona-app #pdf-logo-input { max-width: 220px; font-size: 12px; color: var(--muted); }
+.persona-app #pdf-logo-input::file-selector-button { background: var(--field); color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; margin-right: 8px; cursor: pointer; }
+.persona-app #pdf-logo-preview { max-width: 72px; max-height: 32px; object-fit: contain; }
+.persona-app #remove-pdf-logo { font-size: 12px; padding: 6px 10px; }
