@@ -21,10 +21,10 @@ function renderPersona() {
         <section id="${index + 1}" class="${ordinals[index]}-page" ${index ? 'hidden' : ''}>
             <div class="column left ${index === 0 ? 'curve' : index === 1 ? 'blue' : ''}">
                 <div class="column-padding">
-                    <div class="selected-avatar-wrapper">
+                    ${index ? `<div class="selected-avatar-wrapper">
                         <img class="avatar walkthrough-avatar" src="default-avatar.svg" alt="Persona avatar">
                         <input class="name avatar-name" data-field="name" type="text" aria-label="Name your persona">
-                    </div>
+                    </div>` : ''}
                     <h2>Why is this step important ?</h2>
                     <p>${escape(step.description)}</p>
                     <button type="button" class="button-walk">Skip Walkthrough mode</button>
@@ -32,12 +32,14 @@ function renderPersona() {
             </div>
             <div class="column right">
                 <div class="column-padding">
-                    <h3 class="page-title">Step ${index + 1}/${personaSteps.length} : ${escape(step.title)}</h3>
+                    <p class="step-number">Step ${index + 1} / ${personaSteps.length}</p>
+                    <h3 class="page-title">${escape(step.title)}</h3>
                     <progress class="step-progress" value="${index + 1}" max="${personaSteps.length}" aria-label="Walkthrough progress"></progress>
                     ${index === 0 ? `<label for="avatar-input">Pick your avatar:</label>
                     <div id="avatar-wrapper" data-action="choose-avatar">
                         <img id="avatar-image" src="default-avatar.svg" alt="Choose your persona avatar">
                     </div>
+                    <span class="persona-name" data-persona-name></span>
                     <input type="file" id="avatar-input" accept="image/*" hidden>` : ''}
                     ${step.fields.map(field => fieldHTML(field, 'walk')).join('')}
                 </div>
@@ -55,5 +57,6 @@ function renderPersona() {
             <img class="avatar dragable-item" src="default-avatar.svg" alt="Persona avatar">
             <span class="persona-name" data-persona-name></span>
         </div>${cards(personaSteps.slice(0, 2))}`;
-    document.querySelector('#sortable-list-2').innerHTML = cards(personaSteps.slice(2));
+    document.querySelector('#sortable-list-2').innerHTML = personaSteps.slice(2).map(step =>
+        `<h3 class="overview-section-title">${escape(step.title)}</h3>${cards([step])}`).join('');
 }
