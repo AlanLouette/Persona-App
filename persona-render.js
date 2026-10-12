@@ -21,10 +21,10 @@ function renderPersona() {
         <section id="${index + 1}" class="${ordinals[index]}-page" ${index ? 'hidden' : ''}>
             <div class="column left ${index === 0 ? 'curve' : index === 1 ? 'blue' : ''}">
                 <div class="column-padding">
-                    ${index ? `<div class="selected-avatar-wrapper">
+                    <div class="selected-avatar-wrapper">
                         <img class="avatar walkthrough-avatar" src="default-avatar.svg" alt="Persona avatar">
                         <input class="name avatar-name" data-field="name" type="text" aria-label="Name your persona">
-                    </div>` : ''}
+                    </div>
                     <h2>Why is this step important ?</h2>
                     <p>${escape(step.description)}</p>
                     <button type="button" class="button-walk">Skip Walkthrough mode</button>

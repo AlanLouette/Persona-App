@@ -9,7 +9,7 @@
     margin: 0;
     color: var(--text);
     background: var(--bg);
-    font: 15px/1.6 system-ui, sans-serif;
+    font: 15px/1.6 'Poppins', system-ui, sans-serif;
     min-height: 100vh;
     color-scheme: dark;
 }
@@ -19,9 +19,9 @@
 .persona-app h1, .persona-app h2, .persona-app h3 { font: inherit; font-weight: 600; letter-spacing: -.025em; }
 .persona-app button, .persona-app input, .persona-app textarea, .persona-app select { font: inherit; }
 .persona-app button {
-    padding: 9px 19px;
-    border: 1px solid var(--line);
-    border-radius: 5px;
+    padding: 12px 24px;
+    border: 1px solid #aaa9b8;
+    border-radius: 14px;
     background: transparent;
     color: var(--text);
     cursor: pointer;
@@ -49,8 +49,8 @@
 .persona-app label { color: var(--text); font-size: 13px; font-weight: 500; line-height: 1.5; }
 
 /* Guided questions share the same dark page, separated only by a fine rule. */
-.persona-app .walkthrough { max-width: 1180px; margin: auto; padding: 64px 40px; }
-.persona-app .walk-container section { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 72px; }
+.persona-app .walkthrough { max-width: 1180px; margin: auto; padding: 48px 40px; min-height: 100vh; }
+.persona-app .walk-container section { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 72px; min-height: calc(100vh - 96px); }
 .persona-app .column.left { padding-right: 32px; border-right: 1px solid var(--line); }
 .persona-app .column-padding { display: flex; flex-direction: column; }
 .persona-app .selected-avatar-wrapper { display: flex; align-items: center; flex-direction: column; margin-bottom: 40px; }
@@ -64,15 +64,15 @@
 .persona-app .left p { font-size: 13px; color: var(--muted); line-height: 1.9; }
 .persona-app .button-walk:not(.confirm) { color: var(--muted); font-size: 12px; margin-top: 24px; align-self: flex-start; padding: 8px 13px; }
 .persona-app .page-title { font-size: 25px; line-height: 1.4; margin-bottom: 14px; }
-.persona-app .step-progress { appearance: none; width: 100%; height: 3px; border: 0; background: var(--line); border-radius: 3px; margin-bottom: 28px; }
-.persona-app .step-progress::-webkit-progress-bar { background: var(--line); border-radius: 3px; }
-.persona-app .step-progress::-webkit-progress-value { background: var(--accent); border-radius: 3px; }
-.persona-app .step-progress::-moz-progress-bar { background: var(--accent); }
+.persona-app .step-progress { appearance: none; width: 100%; height: 4px; border: 0; background: #18172d; border-radius: 3px; margin-bottom: 28px; }
+.persona-app .step-progress::-webkit-progress-bar { background: #18172d; border-radius: 3px; }
+.persona-app .step-progress::-webkit-progress-value { background: linear-gradient(90deg, #3632b4, #7540d7, #ed00d5, #7540d7, #3632b4); border-radius: 3px; }
+.persona-app .step-progress::-moz-progress-bar { background: linear-gradient(90deg, #3632b4, #7540d7, #ed00d5, #7540d7, #3632b4); }
 .persona-app .right label { margin: 16px 0 8px; }
 .persona-app #avatar-wrapper { align-self: flex-start; cursor: pointer; margin: 4px 0 12px; }
 .persona-app #avatar-image { width: 76px; height: 76px; }
 .persona-app .buttons-section { display: flex; justify-content: flex-end; gap: 12px; padding-top: 30px; }
-.persona-app .next-button, .persona-app .confirm { background: #ecebe8; border-color: #ecebe8; color: #171819; }
+.persona-app .next-button, .persona-app .confirm { background: transparent; border-color: #aaa9b8; color: var(--text); }
 
 /* Overview: open columns, quiet fields, no large enclosing panel. */
 .persona-app .overview { --persona-color: #a78bfa; max-width: 1240px; margin: auto; padding: 28px 40px 80px; }
@@ -140,6 +140,9 @@
 .persona-app .overview label { font-weight: 400; color: #c5c5c0; }
 .persona-app .overview .new-title { padding: 0; }
 .persona-app .first-page #avatar-wrapper { margin-bottom: 8px; }
-.persona-app .first-page #avatar-image { width: 112px; height: 112px; border-color: var(--line); }
+.persona-app .first-page #avatar-image { width: 76px; height: 76px; border-color: var(--line); }
 .persona-app .first-page [data-persona-name] { text-align: left; font-size: 18px; margin: 0 0 18px; }
-.persona-app .next-button:hover, .persona-app .confirm:hover { background: #d6d5d2; border-color: #d6d5d2; }
+.persona-app .next-button:hover, .persona-app .confirm:hover { background: #ffffff08; border-color: #d5d3df; }
+
+.persona-app .column.right { display: flex; flex-direction: column; }
+.persona-app .buttons-section { margin-top: auto; }
