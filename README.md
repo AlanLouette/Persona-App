@@ -20,3 +20,10 @@ The app loads jsPDF and Sortable from their CDN. No framework or build step is r
 
 To edit a question, its placeholder or a step explanation, update `persona-data.js`.
 Both views use the same definition, with unique input IDs and matching labels.
+
+## Website integration
+
+Wrap the app in an element with class `persona-app` (the standalone page uses it
+on `body`). All CSS selectors are scoped to this class to avoid styling the host
+website. The interface uses a dark navy background and subtle violet accents;
+the selected persona color is used for the portrait border, export button and PDF.

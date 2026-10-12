@@ -33,6 +33,7 @@ function renderPersona() {
             <div class="column right">
                 <div class="column-padding">
                     <h3 class="page-title">Step ${index + 1}/${personaSteps.length} : ${escape(step.title)}</h3>
+                    <progress class="step-progress" value="${index + 1}" max="${personaSteps.length}" aria-label="Walkthrough progress"></progress>
                     ${index === 0 ? `<label for="avatar-input">Pick your avatar:</label>
                     <div id="avatar-wrapper" data-action="choose-avatar">
                         <img id="avatar-image" src="default-avatar.svg" alt="Choose your persona avatar">
