@@ -212,7 +212,7 @@ button,
 .confirm {
     cursor: pointer;
     color: white;
-    border-radius: 0;
+    border-radius: 16px;
     border: 1px solid #DAB667;
     background-color: transparent;
     font-size: var(--size-small) !important;
@@ -400,13 +400,18 @@ Overview page
 }
 
 .share-icons a {
-    display: inline-block;
-    margin: 0 5px;
-
-    border: 2px solid;
-    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 64px;
+    width: 64px;
+    height: 64px;
+    box-sizing: border-box;
+    margin: 0 8px;
+    border: 3px solid;
+    border-radius: 50%;
     color: white;
-    padding: 0.5rem;
+    padding: 0;
 }
 
 .share-icons a:hover {
@@ -414,7 +419,9 @@ Overview page
 }
 
 .share-icons img {
-    max-width: 20px;
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
 }
 
 .share-container {
@@ -608,9 +615,7 @@ Overview page
         display: none;
     }
 }
-/* Square action buttons and consistent share targets. */
-.share-icons a { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; }
-.share-icons img { width: 20px; height: 20px; object-fit: contain; }
+/* Editor controls. */
 .overview input, .overview textarea, .overview select { min-width: 0; width: 100%; box-sizing: border-box; }
 .overview textarea { overflow: hidden; }
 .drag-handle { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); cursor: grab; color: #CBD6E2; }
