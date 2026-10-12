@@ -34,14 +34,14 @@ function renderPersona() {
                 <div class="column-padding">
                     <p class="step-number">Step ${index + 1} / ${personaSteps.length}</p>
                     <h3 class="page-title">${escape(step.title)}</h3>
-                    <progress class="step-progress" value="${index + 1}" max="${personaSteps.length}" aria-label="Walkthrough progress"></progress>
+                    <div class="step-progress" role="progressbar" aria-valuemin="0" aria-valuemax="${personaSteps.length}" aria-valuenow="${index + 1}" aria-label="Walkthrough progress"><span class="step-progress-fill" style="transform: scaleX(${(index + 1) / personaSteps.length})"></span></div>
                     ${index === 0 ? `<label for="avatar-input">Pick your avatar:</label>
                     <div id="avatar-wrapper" data-action="choose-avatar">
                         <img id="avatar-image" src="default-avatar.svg" alt="Choose your persona avatar">
                     </div>
                     <span class="persona-name" data-persona-name></span>
                     <input type="file" id="avatar-input" accept="image/*" hidden>` : ''}
-                    ${step.fields.map(field => fieldHTML(field, 'walk')).join('')}
+                    <div class="walk-fields">${step.fields.map(field => `<div class="walk-field">${fieldHTML(field, 'walk')}</div>`).join('')}</div>
                 </div>
                 <div class="buttons-section">
                     ${index ? '<button type="button" class="prev-button">Previous</button>' : ''}

@@ -24,9 +24,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const current = button.closest('section');
         const next = button.matches('.next-button') ? current.nextElementSibling : current.previousElementSibling;
         if (!next) return;
+        const forward = button.matches('.next-button');
+        current.querySelectorAll('.right, .step-progress-fill').forEach(element => element.getAnimations().forEach(animation => animation.cancel()));
         current.hidden = true;
         next.hidden = false;
-        next.querySelector('.right input, .right textarea, .right select')?.focus();
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            const options = { duration: 320, easing: 'cubic-bezier(.22, 1, .36, 1)' };
+            next.querySelector('.right').animate([
+                { opacity: 0, transform: `translateX(${forward ? 14 : -14}px)` },
+                { opacity: 1, transform: 'translateX(0)' }
+            ], options);
+            const previousValue = Number(current.querySelector('[role="progressbar"]').getAttribute('aria-valuenow'));
+            const progress = next.querySelector('[role="progressbar"]');
+            next.querySelector('.step-progress-fill').animate([
+                { transform: `scaleX(${previousValue / Number(progress.getAttribute('aria-valuemax'))})` },
+                { transform: next.querySelector('.step-progress-fill').style.transform }
+            ], { ...options, duration: 450 });
+        }
+        next.querySelector('.right input:not([type="file"]), .right textarea, .right select')?.focus({ preventScroll: true });
     };
 
     document.addEventListener('input', ({ target }) => {
