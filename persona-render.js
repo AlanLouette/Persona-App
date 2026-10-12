@@ -53,6 +53,7 @@ function renderPersona() {
     document.querySelector('#sortable-list').innerHTML = `
         <div class="justify-center" data-action="choose-avatar">
             <img class="avatar dragable-item" src="default-avatar.svg" alt="Persona avatar">
+            <span class="persona-name" data-persona-name></span>
         </div>${cards(personaSteps.slice(0, 2))}`;
     document.querySelector('#sortable-list-2').innerHTML = cards(personaSteps.slice(2));
 }

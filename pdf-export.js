@@ -3,7 +3,11 @@ async function exportPersonaPDF(root, color) {
     const doc = new jsPDF('p', 'mm', 'a4');
     const rgb = color.match(/\w\w/g).map(channel => parseInt(channel, 16));
     const left = 18, right = 192, bottom = 278, line = 5;
-    let y = 40;
+    const contentTop = 47;
+    let y = contentTop;
+    let currentSection = '';
+    const personaName = root.querySelector('[data-field="name"]')?.value.trim() || '';
+    let portraitHeight = 44;
     const font = (size, bold = false) => {
         doc.setFontSize(size);
         doc.setFontStyle(bold ? 'bold' : 'normal');
@@ -14,10 +18,15 @@ async function exportPersonaPDF(root, color) {
         doc.text('Persona Canvas', left, 22);
         font(9);
         doc.setTextColor(80, 80, 80);
-        doc.text('door BeMarketing Group', left, 29);
+        doc.text('by BeMarketing Group', left, 29);
+        if (currentSection) doc.text(currentSection, right, 29, { align: 'right' });
+        doc.setDrawColor(220, 220, 230);
+        doc.setLineWidth(0.3);
+        doc.line(left, 35, right, 35);
     };
-    const nextPage = () => { doc.addPage(); header(); y = 40; };
+    const nextPage = () => { doc.addPage(); header(); y = contentTop; };
     const section = title => {
+        currentSection = title;
         if (y + 25 > bottom) nextPage();
         font(14, true);
         doc.setTextColor(...rgb);
@@ -52,7 +61,7 @@ async function exportPersonaPDF(root, color) {
     };
     const fullField = field => {
         let { heading, body, height } = measure(field, right - left);
-        if (height <= bottom - 40 && y + height > bottom) nextPage();
+        if (height <= bottom - contentTop && y + height > bottom) nextPage();
         // Repeat the original question when a very long answer continues.
         while (body.length) {
             const available = Math.floor((bottom - y - heading.length * line - 8) / line);
@@ -93,13 +102,19 @@ async function exportPersonaPDF(root, color) {
         ctx.drawImage(avatar, (avatar.naturalWidth - side) / 2, (avatar.naturalHeight - side) / 2, side, side, 0, 0, 512, 512);
         doc.addImage(canvas.toDataURL('image/png'), 'PNG', left, y, 34, 34);
         doc.setDrawColor(...rgb); doc.circle(left + 17, y + 17, 17);
+        if (personaName) {
+            font(11, true); doc.setTextColor(30, 30, 30);
+            const nameLines = doc.splitTextToSize(personaName, 38);
+            doc.text(nameLines, left + 17, y + 41, { align: 'center' });
+            portraitHeight = 46 + nameLines.length * line;
+        }
     }
     const profile = [...root.querySelectorAll('#sortable-list div.dragable-item')].map(read).filter(Boolean);
     // Compact profile facts beside the portrait; descriptions get full width.
     const facts = profile.filter(field => !field.long);
     const start = y;
     fields(facts, left + 44, right - left - 44);
-    y = Math.max(y, start + 44);
+    y = Math.max(y, start + portraitHeight);
     profile.filter(field => field.long).forEach(fullField);
     y += 5;
     section('Professional details');

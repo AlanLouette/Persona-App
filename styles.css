@@ -124,3 +124,7 @@
 @media (prefers-reduced-motion: reduce) {
     .persona-app button { transition: none; }
 }
+
+.persona-app .justify-center { flex-direction: column; align-items: center; gap: 14px; }
+.persona-app .persona-name { color: var(--text); font-size: 20px; font-weight: 600; text-align: center; overflow-wrap: anywhere; max-width: 100%; }
+.persona-app .persona-name:empty { display: none; }

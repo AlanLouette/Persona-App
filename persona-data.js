@@ -41,14 +41,14 @@ const personaSteps = [
                 "key": "biography",
                 "label": "His biography :",
                 "type": "textarea",
-                "placeholder": "Hier komt een korte biografische beschrijving van je persona.",
+                "placeholder": "Write a short biography of your persona.",
                 "size": "small"
             },
             {
                 "key": "behaviour",
                 "label": "Tell us about his behaviour ? :",
                 "type": "textarea",
-                "placeholder": "Hier komen specifieke karaktertrekken of gewoontes van deze persona.",
+                "placeholder": "Describe the specific personality traits or habits of this persona.",
                 "size": "small"
             }
         ]
@@ -112,7 +112,7 @@ const personaSteps = [
                 "key": "role",
                 "label": "Role in decision making process :",
                 "type": "textarea",
-                "placeholder": "Specificeer de rol in het besluitvormingsproces",
+                "placeholder": "Describe their role in the decision-making process.",
                 "size": "big"
             }
         ]
@@ -125,14 +125,14 @@ const personaSteps = [
                 "key": "pain",
                 "label": "Frustrations (pain points) :",
                 "type": "textarea",
-                "placeholder": "Wat is het probleem dat je persona graag wilt oplossen? Wat zijn hun frustraties? Wat houdt hun tegen hun maximale potentieel te bereiken?",
+                "placeholder": "What problem does your persona want to solve? What frustrates them? What prevents them from reaching their full potential?",
                 "size": "big"
             },
             {
                 "key": "goals",
                 "label": "Motivation (goals) :",
                 "type": "textarea",
-                "placeholder": "Welk doel heeft jouw persona in zijn/haar job? Wat zijn de belangrijkste motivaties?",
+                "placeholder": "What does your persona want to achieve in their job? What are their main motivations?",
                 "size": "big"
             }
         ]
@@ -145,21 +145,21 @@ const personaSteps = [
                 "key": "criteria",
                 "label": "Decision criteria :",
                 "type": "textarea",
-                "placeholder": "Op basis van welke criteria beslist jouw persona om al dan niet met jouw in zee te gaan? Op basis van welke criteria gaat hij jou als voorkeurspartner naar voren schuiven bij z’n baas?",
+                "placeholder": "What criteria does your persona use to decide whether to work with you? What would make them recommend you to their manager?",
                 "size": "small"
             },
             {
                 "key": "quotes",
                 "label": "Real quotes :",
                 "type": "textarea",
-                "placeholder": "Wat zijn enkele echte citaten van jouw persona? Wat hebben bestaande klanten van jou al gezegd?",
+                "placeholder": "What are some real quotes from your persona? What have your existing customers said?",
                 "size": "small"
             },
             {
                 "key": "objections",
                 "label": "Common objections :",
                 "type": "textarea",
-                "placeholder": "Welke bezwaren heeft deze persona waarom hij niet met jou in zee kan gaan? Wat kan hem potentieel tegenhouden?",
+                "placeholder": "What objections could prevent this persona from working with you? What might hold them back?",
                 "size": "small"
             }
         ]
@@ -172,21 +172,21 @@ const personaSteps = [
                 "key": "awarness",
                 "label": "Awarness :",
                 "type": "textarea",
-                "placeholder": "Hoe, waar en wanneer wordt je persona zich bewust van jou bedrijf, dienst of sector?",
+                "placeholder": "How, where and when does your persona become aware of your company, service or industry?",
                 "size": "big"
             },
             {
                 "key": "consideration",
                 "label": "Consideration :",
                 "type": "textarea",
-                "placeholder": "Via welke kanalen hou je deze persona geïnformeerd? Hoe zorg je dat hij/zij aan jou denkt en niet aan je concurrenten?",
+                "placeholder": "Which channels do you use to keep this persona informed? How do you make sure they think of you rather than your competitors?",
                 "size": "big"
             },
             {
                 "key": "action",
                 "label": "Action :",
                 "type": "textarea",
-                "placeholder": "Op welke manieren kan je persona de stap zetten om met jou in zee te gaan of z’n gegevens achter te laten?",
+                "placeholder": "How can your persona take the next step to work with you or share their contact details?",
                 "size": "big"
             }
         ]
@@ -199,14 +199,14 @@ const personaSteps = [
                 "key": "help",
                 "label": "How can you help your persona ?",
                 "type": "textarea",
-                "placeholder": "Wat kan jij doen om deze persona te helpen met zijn frustraties weg te werken en zijn doelen te behalen?",
+                "placeholder": "How can you help this persona overcome their frustrations and achieve their goals?",
                 "size": "big"
             },
             {
                 "key": "marketing-message",
                 "label": "Marketing message :",
                 "type": "textarea",
-                "placeholder": "Op basis van al het voorgaande: hoe pitch je jouw dienst of product aan deze persona? Wat zijn de belangrijkste USPs?",
+                "placeholder": "Based on the information above, how would you pitch your service or product to this persona? What are the main unique selling points?",
                 "size": "big"
             }
         ]

@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
             input.value = target.value;
             resize(input);
         });
+        if (field === 'name') all('[data-persona-name]').forEach(label => label.textContent = target.value.trim());
         resize(target);
     });
 
