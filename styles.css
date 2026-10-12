@@ -162,7 +162,9 @@
     isolation: isolate;
     overflow: hidden;
     background: transparent;
+    border-color: transparent;
 }
+.persona-app .next-button:hover { border-color: transparent; }
 .persona-app .next-button::before, .persona-app #generate-pdf::before {
     content: "";
     position: absolute;
