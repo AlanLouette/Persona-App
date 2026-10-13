@@ -110,10 +110,7 @@
     .persona-app .walk-container section { grid-template-columns: 240px minmax(0, 1fr); gap: 40px; }
     .persona-app .overview-container { grid-template-columns: 220px minmax(0, 1fr); gap: 36px; }
 }
-@media (max-width: 980px) {
-    .persona-app .warning-message { display: block; }
-    .persona-app .walkthrough, .persona-app .overview { display: none; }
-}
+
 @media (hover: none) {
     .persona-app .drag-handle, .persona-app button.delete-icon { opacity: 1; }
 }
@@ -214,3 +211,10 @@
 .persona-app #saved-personas { max-width: 230px; }
 .persona-app .persona-library label, .persona-app .audience-toolbar label { font-size: 13px; color: var(--muted); }
 .persona-app .audience-toolbar { width: 90%; max-width: 1400px; padding: 16px 20px 0; margin: auto; }
+
+/* Small screens show only the original screen-size message. */
+@media (max-width: 980px) {
+    .persona-app .warning-message { display: block; }
+    .persona-app .walkthrough, .persona-app .overview,
+    .persona-app .draft-toolbar, .persona-app .audience-toolbar { display: none; }
+}
