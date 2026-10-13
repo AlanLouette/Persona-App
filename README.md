@@ -1,10 +1,10 @@
 # Persona App
 
-Open `persona.html` through a local web server (for example `python3 -m http.server`).
+Open `index.html` through a local web server (for example `python3 -m http.server`).
 
 ## Structure
 
-- `persona.html`: page shell, sharing links, toolbar and view containers.
+- `index.html`: page shell, sharing links, toolbar and view containers.
 - `persona-data.js`: the 26 questions, eight step titles and explanatory copy, defined once.
 - `persona-render.js`: builds walkthrough steps and overview cards from those definitions.
 - `functions.js`: view transitions, synchronized inputs, avatar uploads, sections and color selection.
@@ -54,3 +54,7 @@ retained when switching context and are excluded from the PDF. Each walkthrough
 step has a short explanation defined in `persona-data.js`.
 
 Run `npm test` for JSON import validation checks.
+
+Deploy the app files inside `/persona/`; `index.html` is the directory entry page
+so the public address is `https://alanlouette.be/persona/`. Remove the old
+`persona.html` from the server after updating any links to it.
