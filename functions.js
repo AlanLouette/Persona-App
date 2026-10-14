@@ -26,12 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const next = button.matches('.next-button') ? current.nextElementSibling : current.previousElementSibling;
         if (!next) return;
         const forward = button.matches('.next-button');
-        current.querySelectorAll('.right, .step-progress-fill').forEach(element => element.getAnimations().forEach(animation => animation.cancel()));
+        current.querySelectorAll('.right .column-padding, .step-progress-fill').forEach(element => element.getAnimations().forEach(animation => animation.cancel()));
         current.hidden = true;
         next.hidden = false;
         if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             const options = { duration: 320, easing: 'cubic-bezier(.22, 1, .36, 1)' };
-            next.querySelector('.right').animate([
+            next.querySelector('.right .column-padding').animate([
                 { opacity: 0, transform: `translateX(${forward ? 14 : -14}px)` },
                 { opacity: 1, transform: 'translateX(0)' }
             ], options);

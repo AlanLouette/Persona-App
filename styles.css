@@ -222,3 +222,18 @@
 .persona-app .step-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 14px; }
 .persona-app .step-heading { flex: 1; min-width: 220px; }
 .persona-app .step-header .page-title { margin-bottom: 0; }
+
+/* Keep navigation at the bottom of the viewport, independent of form length. */
+.persona-app .walkthrough { padding-bottom: 110px; }
+.persona-app .buttons-section {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1400px;
+    padding: 16px 20px;
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+    z-index: 10;
+}
