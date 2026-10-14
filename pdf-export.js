@@ -151,5 +151,11 @@ async function exportPersonaPDF(root, color, logo = null) {
         doc.setPage(page); font(8); doc.setTextColor(120, 120, 120);
         doc.text(`${page} / ${count}`, right - 12, 288);
     }
-    doc.save('file.pdf');
+    doc.save(personaFilename(personaName, 'pdf'));
+}
+
+function personaFilename(name, extension) {
+    const person = String(name || '').trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9_-]+/gi, '-').replace(/^-+|-+$/g, '').slice(0, 80).replace(/-+$/g, '');
+    return `${person ? person + '-' : ''}persona.${extension}`;
 }

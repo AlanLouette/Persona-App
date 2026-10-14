@@ -159,7 +159,7 @@ function setupPersonaStorage({ decorate, applyColor, resize, applyContext }) {
         const blob = new Blob([JSON.stringify({ format: 'alanlouette-persona', version: 1, persona: draft }, null, 2)], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a'); link.href = url;
-        link.download = `${(draft.fields.name || 'persona').replace(/[^a-z0-9_-]/gi, '-').slice(0, 60)}.json`;
+        link.download = personaFilename(draft.fields.name, 'json');
         link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
     });
     const importFile = document.querySelector('#import-persona-file');
