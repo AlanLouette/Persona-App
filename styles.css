@@ -67,7 +67,7 @@
 .persona-app .right label { margin: 16px 0 8px; }
 .persona-app #avatar-wrapper { align-self: flex-start; cursor: pointer; margin: 4px 0 12px; }
 .persona-app #avatar-image { width: 76px; height: 76px; }
-.persona-app .buttons-section { display: flex; justify-content: flex-end; gap: 12px; padding-top: 30px; }
+.persona-app .buttons-section { display: flex; justify-content: flex-end; gap: 12px; padding-top: 0; }
 .persona-app .next-button, .persona-app .confirm { background: transparent; border-color: #aaa9b8; color: var(--text); }
 
 /* Overview: open columns, quiet fields, no large enclosing panel. */
@@ -138,7 +138,7 @@
 .persona-app .next-button:hover, .persona-app .confirm:hover { background: #ffffff08; border-color: #d5d3df; }
 
 .persona-app .column.right { display: flex; flex-direction: column; }
-.persona-app .buttons-section { margin-top: auto; }
+.persona-app .buttons-section { flex-shrink: 0; align-self: center; }
 
 /* Two columns for short profile facts; longer answers keep the full width. */
 .persona-app .walk-fields { display: grid; gap: 0 24px; }
@@ -218,3 +218,7 @@
     .persona-app .walkthrough, .persona-app .overview,
     .persona-app .draft-toolbar, .persona-app .audience-toolbar { display: none; }
 }
+
+.persona-app .step-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 14px; }
+.persona-app .step-heading { flex: 1; min-width: 220px; }
+.persona-app .step-header .page-title { margin-bottom: 0; }
